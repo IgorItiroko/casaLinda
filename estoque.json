@@ -1,0 +1,30 @@
+[
+    {
+        "Nome": "Produtor de alho",
+        "Desc": "Oficial Casalinda",
+        "Preco": 33.33,
+        "Cod": "000",
+        "Qtde": 3
+    },
+    {
+        "Nome": "Cadeira bonita",
+        "Desc": "Vermelha",
+        "Preco": 20.2,
+        "Cod": "001",
+        "Qtde": 2
+    },
+    {
+        "Nome": "Mesa Charmosa",
+        "Desc": "Azul",
+        "Preco": 120.0,
+        "Cod": "002",
+        "Qtde": 2
+    },
+    {
+        "Nome": "Vaso R\u00fastico",
+        "Desc": "Vaso Rosa Perfeito para flores",
+        "Preco": 23.99,
+        "Cod": "003",
+        "Qtde": 6
+    }
+]
