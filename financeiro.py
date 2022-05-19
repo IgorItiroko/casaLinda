@@ -6,7 +6,7 @@ class Financeiro:
             dataFinanceiro = json.load(fileFinanceiro)
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
-        list = {"Cod Compra": len(dataFinanceiro["Registros"]) + 1, "Cod Produto": cod_Produto, "CompraVenda": tipo,"Qtde": qtde, "Valor Uni": valor}
+        list = {"Cod_Compra": len(dataFinanceiro["Registros"]) + 1, "Cod_Produto": cod_Produto, "CompraVenda": tipo,"Qtde": qtde, "Valor Uni": valor}
         dataFinanceiro["Registros"].append(list)
         for index in range(0, len(dataEstoque["Produtos"])):
             if(dataEstoque["Produtos"][index]["Cod"] == cod_Produto):
@@ -26,7 +26,7 @@ class Financeiro:
     
 
 bob = Financeiro()
-bob.adicionarFinanceiro(44,"C",443,444.3)
+print(bob.adicionarFinanceiro(4,"C",10,444.3))
 
 
 
