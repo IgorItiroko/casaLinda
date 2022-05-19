@@ -1,0 +1,18 @@
+{
+    "Registros": [
+        {
+            "Cod Compra": 0,
+            "Cod Produto": 1,
+            "CompraVenda": "V",
+            "Qtde": 1,
+            "Valor Uni": 1
+        },
+        {
+            "Cod Compra": 1,
+            "Cod Produto": 1,
+            "CompraVenda": "C",
+            "Qtde": 3,
+            "Valor Un": 1
+        }
+    ]
+}
