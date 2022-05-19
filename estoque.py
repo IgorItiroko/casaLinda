@@ -91,7 +91,8 @@ class Estoque:
                 json.dump(dataLogs, file4, indent=4)
             return True
         return False
-
+bob = Estoque()
+bob.editarProduto("Lucia",1,"Cenoura","para comer",150)
 
 
 

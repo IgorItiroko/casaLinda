@@ -1,18 +1,32 @@
 {
     "Registros": [
         {
-            "Cod Compra": 0,
-            "Cod Produto": 1,
-            "CompraVenda": "V",
-            "Qtde": 1,
-            "Valor Uni": 1
+            "Cod_Compra": 1,
+            "Cod_Produto": 4,
+            "CompraVenda": "C",
+            "Qtde": 10,
+            "Valor Uni": 444.3
         },
         {
-            "Cod Compra": 1,
-            "Cod Produto": 1,
+            "Cod_Compra": 2,
+            "Cod_Produto": 4,
             "CompraVenda": "C",
-            "Qtde": 3,
-            "Valor Un": 1
+            "Qtde": 10,
+            "Valor Uni": 444.3
+        },
+        {
+            "Cod_Compra": 3,
+            "Cod_Produto": 4,
+            "CompraVenda": "V",
+            "Qtde": 10,
+            "Valor Uni": 444.3
+        },
+        {
+            "Cod_Compra": 4,
+            "Cod_Produto": 1,
+            "CompraVenda": "C",
+            "Qtde": 10,
+            "Valor Uni": 444.3
         }
     ]
 }
