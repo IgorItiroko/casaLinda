@@ -14,19 +14,23 @@ class Financeiro:
                 if(tipo == "C"):
                     dataEstoque["Produtos"][index]["Qtde"] += qtde
                 else:
-                    dataEstoque["Produtos"][index]["Qtde"] -= qtde
+                    if (dataEstoque["Produtos"][index]["Qtde"] - qtde) > 0:
+                        dataEstoque["Produtos"][index]["Qtde"] -= qtde
+                        dataEstoque["Produtos"][index]["Vendas"] += qtde
+                    else:
+                        return (False,"Sem estoque")
         if(encontrado == 1):
-            with open("estoque.json","w") as file3:
-                json.dump(dataEstoque, file3, indent=4)
-            with open("financeiro.json","w") as file2:
-                json.dump(dataFinanceiro, file2, indent=4)
+            with open("estoque.json","w") as fileOutEstoque:
+                json.dump(dataEstoque, fileOutEstoque, indent=4)
+            with open("financeiro.json","w") as fileOutFinanceiro:
+                json.dump(dataFinanceiro, fileOutFinanceiro, indent=4)
             return True
         else: 
-            return False
+            return (False,"Codigo invalido")
     
 
 bob = Financeiro()
-print(bob.adicionarFinanceiro(1,"C",10,444.3))
+print(bob.adicionarFinanceiro(2,"V",3,145.00))
 
 
 

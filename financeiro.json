@@ -27,6 +27,34 @@
             "CompraVenda": "C",
             "Qtde": 10,
             "Valor Uni": 444.3
+        },
+        {
+            "Cod_Compra": 5,
+            "Cod_Produto": 1,
+            "CompraVenda": "V",
+            "Qtde": 50,
+            "Valor Uni": 3.0
+        },
+        {
+            "Cod_Compra": 6,
+            "Cod_Produto": 1,
+            "CompraVenda": "V",
+            "Qtde": 140,
+            "Valor Uni": 3.0
+        },
+        {
+            "Cod_Compra": 7,
+            "Cod_Produto": 3,
+            "CompraVenda": "V",
+            "Qtde": 5,
+            "Valor Uni": 145.0
+        },
+        {
+            "Cod_Compra": 8,
+            "Cod_Produto": 2,
+            "CompraVenda": "V",
+            "Qtde": 3,
+            "Valor Uni": 145.0
         }
     ]
 }
