@@ -1,13 +1,13 @@
 import json
 
 class Feed:
-    def exibir5MaisVendidos(self):
+    def exibirMaisVendidos(self, qtde):
         with open("estoque.json") as fileEstoque: 
             dataEstoque = json.load(fileEstoque)
         list = []
         max = 0
-        if len(dataEstoque["Produtos"]) >= 5:
-            for _ in range(0, 5):
+        if len(dataEstoque["Produtos"]) >= qtde:
+            for _ in range(0, qtde):
                 for index in range(0, len(dataEstoque["Produtos"])):
                     if dataEstoque["Produtos"][index]["Vendas"] >= max:
                         max = dataEstoque["Produtos"][index]["Vendas"]
@@ -16,7 +16,8 @@ class Feed:
                 list.append(dataEstoque["Produtos"][maxid])
                 dataEstoque["Produtos"].pop(maxid)  
             return list
-        return (False, "Menos de 5 elementos")
+        fraseErro = "Quantidade de produtos em exib. menor do que " + str(qtde)
+        return (False, fraseErro)
         
     def faltaDeEstoque(self):
         with open("estoque.json") as fileEstoque:
@@ -27,4 +28,4 @@ class Feed:
                 list.append(dataEstoque["Produtos"][index])
         return list
 bob = Feed()
-print(bob.exibir5MaisVendidos())
+print(bob.exibirMaisVendidos(8))
