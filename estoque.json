@@ -1,43 +1,75 @@
 {
     "Produtos": [
         {
+            "Cod": 1,
             "Nome": "Batata",
             "Desc": "de comer",
             "Preco": 3.99,
-            "Cod": 1,
             "Qtde": 10,
             "Vendas": 190
         },
         {
+            "Cod": 2,
             "Nome": "Lustre",
             "Desc": "Ilumina quarto",
             "Preco": 34.99,
-            "Cod": 2,
             "Qtde": 142.99,
             "Vendas": 3
         },
         {
+            "Cod": 3,
             "Nome": "Mesa",
             "Desc": "Mesa da sala",
             "Preco": 20,
-            "Cod": 3,
             "Qtde": 140.99,
             "Vendas": 5
         },
         {
+            "Cod": 4,
             "Nome": "Mesa",
             "Desc": "Mesa da sala",
             "Preco": 20,
-            "Cod": 4,
             "Qtde": 145.99,
             "Vendas": 0
         },
         {
-            "Nome": "Mesa",
-            "Desc": "Mesa da sala",
-            "Preco": 20,
             "Cod": 5,
+            "Nome": "Mesa",
+            "Desc": "Mesa da vesera",
+            "Preco": 20,
             "Qtde": 146.99,
+            "Vendas": 0
+        },
+        {
+            "Cod": 6,
+            "Nome": "Marjori",
+            "Desc": "Naum sei se eu quero isto",
+            "Preco": 95.2,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 7,
+            "Nome": "Caneta Testada",
+            "Desc": "Ela tem uma cor bonitinha",
+            "Preco": 10,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 8,
+            "Nome": "Caneta Naum tetada",
+            "Desc": "Ela tem uma cor bonitinha",
+            "Preco": 10,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 9,
+            "Nome": "Caneta meio tetada",
+            "Desc": "Ela tem uma cor feia",
+            "Preco": 10,
+            "Qtde": 0,
             "Vendas": 0
         }
     ]
