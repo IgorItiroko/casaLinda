@@ -9,11 +9,20 @@ class Estoque:
         with open(arquivo,"w") as file:
             json.dump(dados, file, indent=4)
 
-    def incluirProduto(self, nome, desc, preco, qtde):
+    def incluirProduto(self, nome, desc, preco):
+        verifElemento=0
         dataEstoque = self.abrirJson("estoque.json")
-        list = {"Nome": nome, "Desc": desc, "Preco": preco, "Cod": len(dataEstoque["Produtos"]) + 1,"Qtde": qtde, "Vendas": 0}
-        dataEstoque["Produtos"].append(list)
-        self.fecharJson("estoque.json",dataEstoque)
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Nome"].upper() == nome.upper():
+                if dataEstoque["Produtos"][index]["Desc"].upper() == desc.upper():
+                    verifElemento=1
+                    break
+        if verifElemento == 0:
+            list = {"Cod": dataEstoque["Produtos"][len(dataEstoque["Produtos"]) - 1]["Cod"] + 1, "Nome": nome, "Desc": desc, "Preco": preco, "Qtde": 0, "Vendas": 0}
+            dataEstoque["Produtos"].append(list)
+            self.fecharJson("estoque.json",dataEstoque)
+        else:
+            print("Elemento já adicionado")
 
     def excluirProduto(self, codProd):
         encontrado = 0
@@ -33,7 +42,7 @@ class Estoque:
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Nome"] == nome:
+            if dataEstoque["Produtos"][index]["Nome"].upper() == nome.upper():
                 list.append(dataEstoque["Produtos"][index])
         return list
         
@@ -79,8 +88,7 @@ class Estoque:
             return True
         return False
 bob = Estoque()
-data = bob.abrirJson("estoque.json")
-print(type(data["Produtos"]))
+bob.incluirProduto("Caneta","bla",10)
 
 
 
