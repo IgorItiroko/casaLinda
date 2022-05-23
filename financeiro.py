@@ -32,7 +32,5 @@ class Financeiro:
 bob = Financeiro()
 print(bob.adicionarFinanceiro(2,"V",3,145.00))
 
-
-
     
 

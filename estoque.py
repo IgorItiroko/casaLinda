@@ -79,8 +79,8 @@ class Estoque:
             return True
         return False
 bob = Estoque()
-bob.editarProduto("Lucia", 2, "Lustre", "Ilumina quarto", 34.99)
-
+data = bob.abrirJson("estoque.json")
+print(type(data["Produtos"]))
 
 
 
