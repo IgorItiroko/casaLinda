@@ -20,6 +20,13 @@
             "Nova_Desc": "de comer",
             "Novo_Preco": 3.99,
             "Autor_Alteracao": "Lucia"
+        },
+        {
+            "Cod_Produto": 2,
+            "Novo_Nome": "Lustre",
+            "Nova_Desc": "Ilumina quarto",
+            "Novo_Preco": 34.99,
+            "Autor_Alteracao": "Lucia"
         }
     ]
 }

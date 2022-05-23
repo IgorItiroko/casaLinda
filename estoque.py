@@ -1,33 +1,36 @@
 import json
 from tokenize import String
 class Estoque:
+    def abrirJson(self, arquivo):
+        with open(arquivo) as file:
+            return json.load(file)
+
+    def fecharJson(self, arquivo, dados):
+        with open(arquivo,"w") as file:
+            json.dump(dados, file, indent=4)
+
     def incluirProduto(self, nome, desc, preco, qtde):
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         list = {"Nome": nome, "Desc": desc, "Preco": preco, "Cod": len(dataEstoque["Produtos"]) + 1,"Qtde": qtde, "Vendas": 0}
         dataEstoque["Produtos"].append(list)
-        with open("estoque.json","w") as fileOutEstoque:
-            json.dump(dataEstoque, fileOutEstoque, indent=4)
+        self.fecharJson("estoque.json",dataEstoque)
 
     def excluirProduto(self, codProd):
         encontrado = 0
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Cod"] == codProd:
                 encontrado = 1
                 dataEstoque["Produtos"].pop(index)
                 break 
         if encontrado == 1:
-            with open("estoque.json","w") as fileOutEstoque:
-                json.dump(dataEstoque, fileOutEstoque, indent=4)
+            self.fecharJson("estoque.json", dataEstoque)
             return True
         return False
         
     
     def pesquisarProdutoPorNome(self, nome):
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Nome"] == nome:
@@ -35,8 +38,7 @@ class Estoque:
         return list
         
     def pesquisarPorPrecoMax(self, precMax):
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Preco"] < precMax:
@@ -44,8 +46,7 @@ class Estoque:
         return list
 
     def pesquisarPorPrecoMin(self, precMin):
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Preco"] > precMin:
@@ -53,8 +54,7 @@ class Estoque:
         return list
 
     def estoqueBaixo(self):
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
+        dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Qtde"] < 2:
@@ -63,10 +63,8 @@ class Estoque:
 
     def editarProduto(self, estado, codProd, novoNome, novaDesc, novoPreco):
         encontrado = 0
-        with open("estoque.json") as fileEstoque:
-            dataEstoque = json.load(fileEstoque)
-        with open("logs.json") as fileLogs:
-            dataLogs = json.load(fileLogs)
+        dataEstoque = self.abrirJson("estoque.json")
+        dataLogs = self.abrirJson("logs.json")
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Cod"] == codProd:
                 encontrado = 1
@@ -76,14 +74,12 @@ class Estoque:
         novoLog = {"Cod_Produto": codProd, "Novo_Nome": novoNome, "Nova_Desc": novaDesc, "Novo_Preco": novoPreco, "Autor_Alteracao": estado}
         dataLogs["Alteracoes"].append(novoLog)
         if encontrado == 1:
-            with open("estoque.json","w") as fileOutEstoque:
-                json.dump(dataEstoque, fileOutEstoque, indent=4)
-            with open("logs.json","w") as fileOutLogs:
-                json.dump(dataLogs, fileOutLogs, indent=4)
+            self.fecharJson("estoque.json",dataEstoque)
+            self.fecharJson("logs.json", dataLogs)
             return True
         return False
 bob = Estoque()
-bob.incluirProduto("Mesa","Mesa da sala", 20, 145.99)
+bob.editarProduto("Lucia", 2, "Lustre", "Ilumina quarto", 34.99)
 
 
 
