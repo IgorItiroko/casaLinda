@@ -1,12 +1,26 @@
 import json
 class Financeiro:
+    """
+        *----------------------------------------*
+
+        Funcoes de validacao de entrada de dados
+
+        *----------------------------------------*
+    """  
     def validaAdd(self, cod, tipo, qtde, valor):
         if tipo == "V" or tipo == "C":
             if isinstance(cod, int) and isinstance(qtde, int):
                 if isinstance(valor,int) or isinstance(valor,float):
                     return True
         return False
+    """
+        *----------------------------------------*
 
+        Funcao de adicionar operacoes na tabela
+        do financeiro
+
+        *----------------------------------------*
+    """  
     def adicionarFinanceiro(self, codProd, tipo, qtde, valor):
         if not self.validaAdd(codProd, tipo, qtde, valor):
             return False
@@ -36,10 +50,6 @@ class Financeiro:
             return True
         else: 
             return (False,"Codigo invalido")
-    
-
-bob = Financeiro()
-print(bob.adicionarFinanceiro(2,"V",3,145.00))
 
     
 

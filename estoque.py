@@ -36,14 +36,30 @@ class Estoque:
                             data["Produtos"][index]["Qtde"]
                         )
         return produto
-        
+    
+    """
+        *----------------------------------------*
+
+        Valida o tipo das entradas feitas pelo 
+        usuario
+
+        *----------------------------------------*
+    """
     def validarInclusao(self, nome, desc, preco):
         if isinstance(nome, str) and isinstance(desc, str):
             if isinstance(preco, (int, float)):
                 if nome != "" and desc != "":
                     return True
         return False
-        
+
+    """
+        *----------------------------------------*
+
+        Funcoes de manipulacao do arquivo Json
+        Incluir, Excluir e Editar a DB
+
+        *----------------------------------------*
+    """  
     def incluirProduto(self, nome, desc, preco):
         if not self.validarInclusao(nome, desc, preco):
             return False
@@ -74,6 +90,33 @@ class Estoque:
             return True
         return False
         
+    def editarProduto(self, estado, codProd, novoNome, novaDesc, novoPreco):
+        if not self.validarInclusao(novoNome, novaDesc, novoPreco):
+            return False
+        encontrado = 0
+        dataEstoque = self.abrirJson("estoque.json")
+        dataLogs = self.abrirJson("logs.json")
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Cod"] == codProd:
+                encontrado = 1
+                dataEstoque["Produtos"][index]["Nome"] = novoNome
+                dataEstoque["Produtos"][index]["Desc"] = novaDesc
+                dataEstoque["Produtos"][index]["Preco"] = novoPreco
+        novoLog = {"Cod_Produto": codProd, "Novo_Nome": novoNome, "Nova_Desc": novaDesc, "Novo_Preco": novoPreco, "Autor_Alteracao": estado}
+        dataLogs["Alteracoes"].append(novoLog)
+        if encontrado == 1:
+            self.fecharJson("estoque.json",dataEstoque)
+            self.fecharJson("logs.json", dataLogs)
+            return True
+        return False
+    
+    """
+        *----------------------------------------*
+
+        Funcoes de busca personalizadas
+
+        *----------------------------------------*
+    """  
     
     def pesquisarProdutoPorNome(self, nome):
         if not isinstance(nome,str):
@@ -173,29 +216,6 @@ class Estoque:
         if not list:
             return (False,"Sem resultados para a pesquisa")
         return list
-
-    def editarProduto(self, estado, codProd, novoNome, novaDesc, novoPreco):
-        if not self.validarInclusao(novoNome, novaDesc, novoPreco):
-            return False
-        encontrado = 0
-        dataEstoque = self.abrirJson("estoque.json")
-        dataLogs = self.abrirJson("logs.json")
-        for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Cod"] == codProd:
-                encontrado = 1
-                dataEstoque["Produtos"][index]["Nome"] = novoNome
-                dataEstoque["Produtos"][index]["Desc"] = novaDesc
-                dataEstoque["Produtos"][index]["Preco"] = novoPreco
-        novoLog = {"Cod_Produto": codProd, "Novo_Nome": novoNome, "Nova_Desc": novaDesc, "Novo_Preco": novoPreco, "Autor_Alteracao": estado}
-        dataLogs["Alteracoes"].append(novoLog)
-        if encontrado == 1:
-            self.fecharJson("estoque.json",dataEstoque)
-            self.fecharJson("logs.json", dataLogs)
-            return True
-        return False
-
-bob = Estoque()
-print(bob.pesquisarPorNomePrecoMinMax("dad",8,6))
 
 
 

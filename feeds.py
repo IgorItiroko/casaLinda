@@ -1,6 +1,15 @@
 import json
 
 class Feed:
+    """
+        *----------------------------------------*
+
+        Funcao de busca de informacoes relevantes
+        como os itens mais vendidos e produtos
+        com falta de estoque
+
+        *----------------------------------------*
+    """  
     def exibirMaisVendidos(self, qtde):
         with open("estoque.json") as fileEstoque: 
             dataEstoque = json.load(fileEstoque)
@@ -34,5 +43,3 @@ class Feed:
             if dataEstoque["Produtos"][index]["Qtde"] == 0:
                 list.append(dataEstoque["Produtos"][index])
         return list
-bob = Feed()
-print(bob.exibirMaisVendidos(20))
