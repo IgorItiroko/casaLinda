@@ -23,6 +23,7 @@ windowManager:
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
+            on_text_validate: app.verificarLogin(user.text, password.text)
 
         MDTextFieldRound:
             id: password
@@ -33,6 +34,7 @@ windowManager:
             font_size: 18
             pos_hint: {"center_x": 0.5}
             password: True
+            on_text_validate: app.verificarLogin(user.text, password.text)
 
         MDLabel:
             id: error_label
@@ -66,11 +68,48 @@ windowManager:
 
 
 <EstoqueScreen>:
-    MDTextFieldRound:
-        id: search
-        hint_text: "Nome do produto"
-        icon_right: "search"
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        size_hint_y: 1.1
+        
+        AnchorLayout:
+            id: data_layout
+
+    MDTextField:
+        id: nome
+        hint_text: "Nome"
+        size_hint_x: None
+        width: 100
+        font_size: 18
+        pos_hint: {"center_x": 0.1}
+
+    MDTextField:
+        id: descricao
+        hint_text: "Descrição"
         size_hint_x: None
         width: 200
         font_size: 18
+        pos_hint: {"center_x": 0.3}
+
+    MDTextField:
+        id: preco
+        hint_text: "Preço"
+        size_hint_x: None
+        width: 200
+        font_size: 18
+        pos_hint: {"center_x": 0.7}
+
+    MDTextField:
+        id: qtde
+        hint_text: "Quantidade"
+        size_hint_x: None
+        width: 200
+        font_size: 18
+        pos_hint: {"center_x": 1}
+    
+    MDRaisedButton:
+        text: "Adicionar"
         pos_hint: {"center_x": 0.5}
+        on_release: app.adicionaDado()
+        y: 10
