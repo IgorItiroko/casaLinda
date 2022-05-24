@@ -1,6 +1,14 @@
+from ast import Str
 import json
 from tokenize import String
 class Estoque:
+    """
+        *----------------------------------------*
+
+        Funcoes para manipulacao do arquivo JSON
+
+        *----------------------------------------*
+    """
     def abrirJson(self, arquivo):
         with open(arquivo) as file:
             return json.load(file)
@@ -9,7 +17,36 @@ class Estoque:
         with open(arquivo,"w") as file:
             json.dump(dados, file, indent=4)
 
+    """
+        *----------------------------------------*
+
+        Monta tuplas, referenciando o arquivo Json
+        como parametro preenche uma tupla para ser
+        usada no KivyMD
+
+        *----------------------------------------*
+    """
+
+    def montaTupla(self, data, index):
+        produto = (
+                            data["Produtos"][index]["Cod"],
+                            data["Produtos"][index]["Nome"],
+                            data["Produtos"][index]["Desc"],
+                            data["Produtos"][index]["Preco"],
+                            data["Produtos"][index]["Qtde"]
+                        )
+        return produto
+        
+    def validarInclusao(self, nome, desc, preco):
+        if isinstance(nome, str) and isinstance(desc, str):
+            if isinstance(preco, (int, float)):
+                if nome != "" and desc != "":
+                    return True
+        return False
+        
     def incluirProduto(self, nome, desc, preco):
+        if not self.validarInclusao(nome, desc, preco):
+            return False
         verifElemento=0
         dataEstoque = self.abrirJson("estoque.json")
         for index in range(0, len(dataEstoque["Produtos"])):
@@ -39,38 +76,107 @@ class Estoque:
         
     
     def pesquisarProdutoPorNome(self, nome):
+        if not isinstance(nome,str):
+            return False
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Nome"].upper() == nome.upper():
-                list.append(dataEstoque["Produtos"][index])
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
         return list
         
     def pesquisarPorPrecoMax(self, precMax):
+        if not isinstance(precMax, (int, float)):
+            return False
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Preco"] < precMax:
-                list.append(dataEstoque["Produtos"][index])
+            if dataEstoque["Produtos"][index]["Preco"] <= precMax:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
         return list
 
     def pesquisarPorPrecoMin(self, precMin):
+        if not isinstance(precMin, (int, float)):
+            return False
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Preco"] > precMin:
-                list.append(dataEstoque["Produtos"][index])
+            if dataEstoque["Produtos"][index]["Preco"] >= precMin:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
+        return list
+
+    def pesquisarPorNomePrecoMinMax(self, nome, precMin, precMax):
+        if not (isinstance(precMax, (int, float)) and isinstance(precMin, (int, float)) and isinstance(nome, str)):
+            return (False, "parametro passado errado")
+        if precMin > precMax:
+            return (False, "valor minimo maior que o maximo")
+            
+        dataEstoque = self.abrirJson("estoque.json")
+        list = []
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Preco"] >= precMin and dataEstoque["Produtos"][index]["Nome"] == nome and dataEstoque["Produtos"][index]["Preco"] <= precMax:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
+        return list
+
+    def pesquisarPorNomePrecoMin(self, nome, precMin):
+        if not (isinstance(precMin, (int, float)) and isinstance(nome, str)):
+            return False
+        dataEstoque = self.abrirJson("estoque.json")
+        list = []
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Preco"] >= precMin and dataEstoque["Produtos"][index]["Nome"] == nome:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
+        return list
+
+    def pesquisarPorNomePrecoMax(self, nome, precMax):
+        if not (isinstance(precMax, (int, float)) and  isinstance(nome, str)):
+            return False
+        dataEstoque = self.abrirJson("estoque.json")
+        list = []
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Preco"] <= precMax and dataEstoque["Produtos"][index]["Nome"] == nome:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
+        return list
+    
+    def pesquisarPorPrecoMinMax(self, precMin, precMax):
+        if not (isinstance(precMax, (int, float)) and isinstance(precMin, (int, float))):
+            return False
+        if precMin > precMax:
+            return (False, "valor minimo maior que o maximo")
+        dataEstoque = self.abrirJson("estoque.json")
+        list = []
+        for index in range(0, len(dataEstoque["Produtos"])):
+            if dataEstoque["Produtos"][index]["Preco"] >= precMin and dataEstoque["Produtos"][index]["Preco"] <= precMax:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
         return list
 
     def estoqueBaixo(self):
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Qtde"] < 2:
-                list.append(dataEstoque["Produtos"][index])
+            if dataEstoque["Produtos"][index]["Qtde"] <= 2:
+                list.append(self.montaTupla(dataEstoque, index))
+        if not list:
+            return (False,"Sem resultados para a pesquisa")
         return list
 
     def editarProduto(self, estado, codProd, novoNome, novaDesc, novoPreco):
+        if not self.validarInclusao(novoNome, novaDesc, novoPreco):
+            return False
         encontrado = 0
         dataEstoque = self.abrirJson("estoque.json")
         dataLogs = self.abrirJson("logs.json")
@@ -87,8 +193,9 @@ class Estoque:
             self.fecharJson("logs.json", dataLogs)
             return True
         return False
+
 bob = Estoque()
-bob.incluirProduto("Caneta","bla",10)
+print(bob.pesquisarPorNomePrecoMinMax("dad",8,6))
 
 
 

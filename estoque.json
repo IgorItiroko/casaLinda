@@ -13,8 +13,8 @@
             "Nome": "Lustre",
             "Desc": "Ilumina quarto",
             "Preco": 34.99,
-            "Qtde": 142.99,
-            "Vendas": 3
+            "Qtde": 136.99,
+            "Vendas": 9
         },
         {
             "Cod": 3,
@@ -85,6 +85,62 @@
             "Nome": "Caneta",
             "Desc": "bla",
             "Preco": 10,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 12,
+            "Nome": "nome",
+            "Desc": 4,
+            "Preco": 5,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 13,
+            "Nome": "nome 123",
+            "Desc": "desc",
+            "Preco": 14,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 14,
+            "Nome": "",
+            "Desc": "desc",
+            "Preco": 14,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 15,
+            "Nome": "art",
+            "Desc": "ast",
+            "Preco": 14,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 16,
+            "Nome": "Caneta",
+            "Desc": "Azul",
+            "Preco": 14.5,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 17,
+            "Nome": "Caneta",
+            "Desc": "Verde",
+            "Preco": 17.5,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 18,
+            "Nome": "Caneta",
+            "Desc": "Lilas",
+            "Preco": 17.5,
             "Qtde": 0,
             "Vendas": 0
         }

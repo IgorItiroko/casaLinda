@@ -55,6 +55,13 @@
             "CompraVenda": "V",
             "Qtde": 3,
             "Valor Uni": 145.0
+        },
+        {
+            "Cod_Compra": 9,
+            "codProd": 2,
+            "CompraVenda": "V",
+            "Qtde": 3,
+            "Valor Uni": 145.0
         }
     ]
 }

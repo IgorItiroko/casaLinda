@@ -13,12 +13,19 @@ class Feed:
                         max = dataEstoque["Produtos"][index]["Vendas"]
                         maxid = index
                 max = 0
-                list.append(dataEstoque["Produtos"][maxid])
+                produto = (
+                            dataEstoque["Produtos"][maxid]["Cod"],
+                            dataEstoque["Produtos"][maxid]["Nome"],
+                            dataEstoque["Produtos"][maxid]["Desc"],
+                            dataEstoque["Produtos"][maxid]["Preco"],
+                            dataEstoque["Produtos"][maxid]["Qtde"],
+                            dataEstoque["Produtos"][maxid]["Vendas"]
+                        )
+                list.append(produto)
+
                 dataEstoque["Produtos"].pop(maxid)  
             return list
-        fraseErro = "Quantidade de produtos em exib. menor do que " + str(qtde)
-        return (False, fraseErro)
-        
+        return (False, "Quantidade de produtos registrados menor do que " + str(qtde))
     def faltaDeEstoque(self):
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
@@ -28,4 +35,4 @@ class Feed:
                 list.append(dataEstoque["Produtos"][index])
         return list
 bob = Feed()
-print(bob.exibirMaisVendidos(8))
+print(bob.exibirMaisVendidos(20))

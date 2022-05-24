@@ -1,15 +1,24 @@
 import json
 class Financeiro:
-    def adicionarFinanceiro(self, cod_Produto, tipo, qtde, valor):
+    def validaAdd(self, cod, tipo, qtde, valor):
+        if tipo == "V" or tipo == "C":
+            if isinstance(cod, int) and isinstance(qtde, int):
+                if isinstance(valor,int) or isinstance(valor,float):
+                    return True
+        return False
+
+    def adicionarFinanceiro(self, codProd, tipo, qtde, valor):
+        if not self.validaAdd(codProd, tipo, qtde, valor):
+            return False
         encontrado = 0
         with open("financeiro.json") as fileFinanceiro:
             dataFinanceiro = json.load(fileFinanceiro)
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
-        list = {"Cod_Compra": len(dataFinanceiro["Registros"]) + 1, "Cod_Produto": cod_Produto, "CompraVenda": tipo,"Qtde": qtde, "Valor Uni": valor}
+        list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "codProd": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor Uni": valor}
         dataFinanceiro["Registros"].append(list)
         for index in range(0, len(dataEstoque["Produtos"])):
-            if(dataEstoque["Produtos"][index]["Cod"] == cod_Produto):
+            if(dataEstoque["Produtos"][index]["Cod"] == codProd):
                 encontrado = 1
                 if(tipo == "C"):
                     dataEstoque["Produtos"][index]["Qtde"] += qtde
