@@ -143,6 +143,38 @@
             "Preco": 17.5,
             "Qtde": 0,
             "Vendas": 0
+        },
+        {
+            "Cod": 19,
+            "Nome": "mesa",
+            "Desc": "de madeira",
+            "Preco": 199.99,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 20,
+            "Nome": "cavalo",
+            "Desc": "de madeira",
+            "Preco": 85.99,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 21,
+            "Nome": "cenoura",
+            "Desc": "vegetal",
+            "Preco": 1.99,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 22,
+            "Nome": "vagem",
+            "Desc": "vegetal",
+            "Preco": 2.88,
+            "Qtde": 0,
+            "Vendas": 0
         }
     ]
 }

@@ -74,6 +74,7 @@ class Estoque:
             list = {"Cod": dataEstoque["Produtos"][len(dataEstoque["Produtos"]) - 1]["Cod"] + 1, "Nome": nome, "Desc": desc, "Preco": preco, "Qtde": 0, "Vendas": 0}
             dataEstoque["Produtos"].append(list)
             self.fecharJson("estoque.json",dataEstoque)
+            return True
         else:
             print("Elemento já adicionado")
 

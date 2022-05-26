@@ -1,0 +1,230 @@
+windowManager:
+    id: windowManagement
+    LoginScreen:
+        name: "login"
+    EstoqueScreen:
+        name: "estoque"
+    AddScreen:
+        name: "add"
+
+<LoginScreen>:
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+
+        MDTextFieldRound:
+            id: user
+            hint_text: "Usuário"
+            icon_right: "account"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate: app.verificarLogin(user.text, password.text)
+
+        MDTextFieldRound:
+            id: password
+            hint_text: "Senha"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            password: True
+            on_text_validate: app.verificarLogin(user.text, password.text)
+
+        MDLabel:
+            id: error_label
+            text: ""
+            theme_text_color: "Error"
+            font_size: 15
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+        Widget:
+            size_hint_y: None
+            height: 10
+
+        MDRoundFlatButton:
+            text: "Entrar"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.verificarLogin(user.text, password.text)
+
+
+    MDLabel:
+        id: title_label
+        text: "Casa linda"
+        font_size: 40
+        halign: 'center'
+        size_hint_y: 1.85
+        height: self.texture_size[1]
+        padding_y: 15
+
+
+<EstoqueScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        size_hint_y: 1.1
+        
+        AnchorLayout:
+            id: data_layout
+
+    MDTextField:
+        id: nome
+        hint_text: "Nome"
+        size_hint_x: None
+        width: 100
+        font_size: 18
+        pos_hint: {"center_x": 0.1}
+
+    MDTextField:
+        id: descricao
+        hint_text: "Descrição"
+        size_hint_x: None
+        width: 200
+        font_size: 18
+        pos_hint: {"center_x": 0.3}
+
+    MDTextField:
+        id: preco
+        hint_text: "Preço"
+        size_hint_x: None
+        width: 200
+        font_size: 18
+        pos_hint: {"center_x": 0.7}
+
+    MDTextField:
+        id: qtde
+        hint_text: "Quantidade"
+        size_hint_x: None
+        width: 200
+        font_size: 18
+        pos_hint: {"center_x": 1}
+    
+    MDRaisedButton:
+        text: "Adicionar"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.addScreen()
+        y: 10
+
+<AddScreen>:
+    MDLabel:
+        id: add_title
+        text: "Adicionar Produto"
+        font_size: 40
+        halign: 'center'
+        size_hint_y: 1.85
+        height: self.texture_size[1]
+        padding_y: 15
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 2
+        size_hint_y: 1.1
+        width: 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+        MDTextField:
+            id: nome
+            hint_text: "Nome"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+
+        MDTextField:
+            id: desc
+            hint_text: "Desc"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+            
+        MDTextField:
+            id: preco
+            hint_text: "Preco"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+        MDRoundFlatButton:
+            text: "Adicionar"
+            font_size: 40
+            pos_hint: {"center_x": 0.5}
+            on_press: app.adicionaDado(nome.text, desc.text, preco.text)
+        MDLabel:
+            id: error_label_add
+            text: ""
+            theme_text_color: "Error"
+            font_size: 25
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+<EditScreen>:
+    MDLabel:
+        id: edit_title
+        text: "Editar Produto"
+        font_size: 40
+        halign: 'center'
+        size_hint_y: 1.85
+        height: self.texture_size[1]
+        padding_y: 15
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 2
+        size_hint_y: 1.1
+        width: 600
+        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+        MDTextField:
+            id: novo_nome
+            hint_text: "Nome"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+
+        MDTextField:
+            id: nova_desc
+            hint_text: "Desc"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            
+        MDTextField:
+            id: novo_preco
+            hint_text: "Preco"
+            size_hint_x: None
+            width: 300
+            font_size: 60
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+        MDRoundFlatButton:
+            text: "Adicionar"
+            font_size: 40
+            pos_hint: {"center_x": 0.5}
+            on_press: app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+        MDLabel:
+            id: error_label_edit
+            text: ""
+            theme_text_color: "Error"
+            font_size: 25
+            halign: 'center'
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 15
+
+    
