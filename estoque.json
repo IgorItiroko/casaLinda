@@ -39,6 +39,22 @@
             "Cod": 5,
             "Qtde": 146.99,
             "Vendas": 0
+        },
+        {
+            "Cod": 6,
+            "Nome": "pao",
+            "Desc": "sim",
+            "Preco": 40,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 7,
+            "Nome": "pko",
+            "Desc": "sim",
+            "Preco": 40,
+            "Qtde": 0,
+            "Vendas": 0
         }
     ]
 }

@@ -4,6 +4,8 @@ windowManager:
         name: "login"
     EstoqueScreen:
         name: "estoque"
+    AddScreen:
+        name: "add"
 
 <LoginScreen>:
     MDCard:
@@ -111,5 +113,40 @@ windowManager:
     MDRaisedButton:
         text: "Adicionar"
         pos_hint: {"center_x": 0.5}
-        on_release: app.adicionaDado()
+        on_release: app.addScreen()
         y: 10
+
+<AddScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 8
+        size_hint_y: 1.1
+        pos_hint: {"center_x": 0.5, "center_y": 0.9}
+        MDTextField:
+            id: nome
+            hint_text: "Nome"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+
+        MDTextField:
+            id: desc
+            hint_text: "Desc"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+            
+        MDTextField:
+            id: preco
+            hint_text: "Preco"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+
+    

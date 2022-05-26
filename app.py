@@ -8,11 +8,14 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivy.metrics import dp
 import json
-
+from estoque import Estoque
 class LoginScreen(Screen):
     pass
 
 class EstoqueScreen(Screen):
+    pass
+
+class AddScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
@@ -21,6 +24,7 @@ class windowManager(ScreenManager):
 sm = windowManager()
 sm.add_widget(LoginScreen(name='login'))
 sm.add_widget(EstoqueScreen(name='estoque'))
+sm.add_widget(AddScreen(name='add'))
 
 class MainApp(MDApp):
     def build(self):
@@ -46,6 +50,9 @@ class MainApp(MDApp):
             list.append(produto)
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.8),
+            use_pagination=True,
+            rows_num=5,
+            pagination_menu_pos = 'auto',
             column_data=[
                 ("Código", dp(12)),
                 ("Nome", dp(25)),
@@ -55,6 +62,7 @@ class MainApp(MDApp):
             ],
             row_data= list
         )
+        print(list)
         #self.data_tables.bind(on_row_press = self.row_press)
         self.root.get_screen('estoque').ids.data_layout.add_widget(self.data_tables) 
 
@@ -73,9 +81,14 @@ class MainApp(MDApp):
                 return False
 
 
-    def adicionaDado(self, instance_button: MDRaisedButton) -> None:
-        
-        
+    def adicionaDado(self, nome, desc, preco) -> None:
+        bob = Estoque()
+        bob.incluirProduto(nome, desc, preco)
+
+        return
+
+    def addScreen(self):
+        self.root.current = 'add'
 
         return
 
