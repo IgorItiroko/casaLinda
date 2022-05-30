@@ -91,7 +91,8 @@ class MainApp(MDApp):
         try:
             if (dual.editarProduto(self.codAlteracao ,novoNome, novaDesc, float(novoPreco))):
                 self.codAlteracao = 0
-                
+        except ValueError:
+            return False
 
         
 
