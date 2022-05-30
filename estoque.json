@@ -5,22 +5,22 @@
             "Nome": "Batata",
             "Desc": "de comer",
             "Preco": 3.99,
-            "Qtde": 10,
+            "Qtde": 22,
             "Vendas": 190
         },
         {
             "Cod": 2,
-            "Nome": "Lustre",
-            "Desc": "Ilumina quarto",
-            "Preco": 34.99,
+            "Nome": "134",
+            "Desc": "1234",
+            "Preco": 1324.0,
             "Qtde": 136.99,
             "Vendas": 9
         },
         {
             "Cod": 3,
-            "Nome": "Mesa",
-            "Desc": "Mesa da sala",
-            "Preco": 20,
+            "Nome": "robson",
+            "Desc": "de comer",
+            "Preco": 1999.43,
             "Qtde": 140.99,
             "Vendas": 5
         },

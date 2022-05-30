@@ -6,6 +6,12 @@ windowManager:
         name: "estoque"
     AddScreen:
         name: "add"
+    EditScreen:
+        name: "edit"
+    FinanceiroScreen:
+        name: "financeiro"
+    AddFinanceiroScreen:
+        name: "addFinanceiro"
 
 <LoginScreen>:
     MDCard:
@@ -58,7 +64,6 @@ windowManager:
             pos_hint: {"center_x": 0.5}
             on_press: app.verificarLogin(user.text, password.text)
 
-
     MDLabel:
         id: title_label
         text: "Casa linda"
@@ -70,45 +75,45 @@ windowManager:
 
 
 <EstoqueScreen>:
+    MDLabel:
+        id: error_label_estoque
+        text: ""
+        theme_text_color: "Error"
+        font_size: 15
+        valign: 'center'
+        halign: 'justify'
+        size_hint_y: None
+        height: self.texture_size[1]
+        padding_y: 5
+
     MDBoxLayout:
         orientation: 'vertical'
         padding: 10
-        size_hint_y: 1.1
+
+        MDToolbar:
+            title: "Casa Linda"
+            orientation: 'horizontal'
+            elevation: 10
+
+            MDRaisedButton:
+                text: "Financeiro"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFinanceiro()
+                y: 10
+
+            MDRaisedButton:
+                text: "Logs"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                y: 10
+
+            MDRaisedButton:
+                text: "Sair"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeSair()
+                y: 10
         
         AnchorLayout:
             id: data_layout
-
-    MDTextField:
-        id: nome
-        hint_text: "Nome"
-        size_hint_x: None
-        width: 100
-        font_size: 18
-        pos_hint: {"center_x": 0.1}
-
-    MDTextField:
-        id: descricao
-        hint_text: "Descrição"
-        size_hint_x: None
-        width: 200
-        font_size: 18
-        pos_hint: {"center_x": 0.3}
-
-    MDTextField:
-        id: preco
-        hint_text: "Preço"
-        size_hint_x: None
-        width: 200
-        font_size: 18
-        pos_hint: {"center_x": 0.7}
-
-    MDTextField:
-        id: qtde
-        hint_text: "Quantidade"
-        size_hint_x: None
-        width: 200
-        font_size: 18
-        pos_hint: {"center_x": 1}
     
     MDRaisedButton:
         text: "Adicionar"
@@ -125,18 +130,22 @@ windowManager:
         size_hint_y: 1.85
         height: self.texture_size[1]
         padding_y: 15
-    MDBoxLayout:
+
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
         orientation: 'vertical'
-        padding: 2
-        size_hint_y: 1.1
-        width: 600
-        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+
         MDTextField:
             id: nome
             hint_text: "Nome"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
             on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
 
@@ -144,8 +153,8 @@ windowManager:
             id: desc
             hint_text: "Desc"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
             on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
             
@@ -153,24 +162,33 @@ windowManager:
             id: preco
             hint_text: "Preco"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
             on_text_validate : app.adicionaDado(nome.text, desc.text, preco.text)
+
         MDRoundFlatButton:
             text: "Adicionar"
-            font_size: 40
+            font_size: 15
             pos_hint: {"center_x": 0.5}
             on_press: app.adicionaDado(nome.text, desc.text, preco.text)
+
+        MDRoundFlatButton:
+            text: "Sair"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.changeEstoque()
+
         MDLabel:
             id: error_label_add
             text: ""
             theme_text_color: "Error"
-            font_size: 25
+            font_size: 15
             halign: 'center'
             size_hint_y: None
             height: self.texture_size[1]
             padding_y: 15
+
 <EditScreen>:
     MDLabel:
         id: edit_title
@@ -180,51 +198,165 @@ windowManager:
         size_hint_y: 1.85
         height: self.texture_size[1]
         padding_y: 15
-    MDBoxLayout:
+
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
         orientation: 'vertical'
-        padding: 2
-        size_hint_y: 1.1
-        width: 600
-        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+
         MDTextField:
             id: novo_nome
             hint_text: "Nome"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            on_text_validate : app.editaDado(novo_nome.text, nova_desc.text, novo_preco.text)
 
         MDTextField:
             id: nova_desc
             hint_text: "Desc"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            on_text_validate : app.editaDado(novo_nome.text, nova_desc.text, novo_preco.text)
             
         MDTextField:
             id: novo_preco
             hint_text: "Preco"
             size_hint_x: None
-            width: 300
-            font_size: 60
+            width: 200
+            font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            on_text_validate : app.editaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            
+        MDRoundFlatButton:
+            text: "Editar"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.editaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+
+        MDRoundFlatButton:
+            text: "Sair"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.changeEstoque()
+
+<FinanceiroScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        MDToolbar:
+            title: "Casa Linda"
+            orientation: 'horizontal'
+            elevation: 10
+
+            MDRaisedButton:
+                text: "Estoque"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeEstoque()
+                y: 10
+
+            MDRaisedButton:
+                text: "Logs"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                y: 10
+
+            MDRaisedButton:
+                text: "Sair"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeSair()
+                y: 10
+        
+        AnchorLayout:
+            id: data_layout_financeiro
+    
+    MDRaisedButton:
+        text: "Adicionar"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.addFinanceiroScreen()
+        y: 10
+
+
+<AddFinanceiroScreen>:
+    MDLabel:
+        id: add_title_financeiro
+        text: "Adicionar Produto"
+        font_size: 40
+        halign: 'center'
+        size_hint_y: 1.85
+        height: self.texture_size[1]
+        padding_y: 15
+
+    MDCard:
+        size_hint: None, None
+        size: 300, 400
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: 'vertical'
+
+        MDTextField:
+            id: qtde
+            hint_text: "Quantidade"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
+        MDTextField:
+            id: cod
+            hint_text: "Código"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+            
+        MDTextField:
+            id: tipo
+            hint_text: "Tipo"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
+        MDTextField:
+            id: valor
+            hint_text: "Valor"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
         MDRoundFlatButton:
             text: "Adicionar"
-            font_size: 40
+            font_size: 15
             pos_hint: {"center_x": 0.5}
-            on_press: app.adicionaDado(novo_nome.text, nova_desc.text, novo_preco.text)
+            on_press: app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
+        MDRoundFlatButton:
+            text: "Sair"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.changeFinanceiro()
+
         MDLabel:
-            id: error_label_edit
+            id: error_label_add
             text: ""
             theme_text_color: "Error"
-            font_size: 25
+            font_size: 15
             halign: 'center'
             size_hint_y: None
             height: self.texture_size[1]
             padding_y: 15
-
-    

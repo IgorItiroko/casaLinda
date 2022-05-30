@@ -1,4 +1,5 @@
 import json
+import time
 class Financeiro:
     """
         *----------------------------------------*
@@ -29,7 +30,7 @@ class Financeiro:
             dataFinanceiro = json.load(fileFinanceiro)
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
-        list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "codProd": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor Uni": valor}
+        list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
         dataFinanceiro["Registros"].append(list)
         for index in range(0, len(dataEstoque["Produtos"])):
             if(dataEstoque["Produtos"][index]["Cod"] == codProd):
@@ -51,5 +52,4 @@ class Financeiro:
         else: 
             return (False,"Codigo invalido")
 
-    
 
