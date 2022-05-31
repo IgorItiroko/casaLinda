@@ -10,9 +10,12 @@ class Financeiro:
     """  
     def validaAdd(self, cod, tipo, qtde, valor):
         if tipo == "V" or tipo == "C":
-            if isinstance(cod, int) and isinstance(qtde, int):
-                if isinstance(valor,int) or isinstance(valor,float):
-                    return True
+            if isinstance(cod, int) and isinstance(qtde, int) and isinstance(valor,(int,float)):
+                return True
+            else:
+                print("Valores fornecidos não são números")
+        else:
+            print("Tipo de transacao incompativel com compra ou venda")
         return False
     """
         *----------------------------------------*
@@ -51,5 +54,3 @@ class Financeiro:
             return True
         else: 
             return (False,"Codigo invalido")
-
-

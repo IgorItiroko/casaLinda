@@ -9,14 +9,6 @@
             "Vendas": 190
         },
         {
-            "Cod": 2,
-            "Nome": "banana",
-            "Desc": "prata",
-            "Preco": 6.99,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
             "Cod": 3,
             "Nome": "1",
             "Desc": "1",
@@ -29,6 +21,22 @@
             "Nome": "2",
             "Desc": "2",
             "Preco": 2.0,
+            "Qtde": 13,
+            "Vendas": 0
+        },
+        {
+            "Cod": 5,
+            "Nome": "5",
+            "Desc": "5",
+            "Preco": 10.99,
+            "Qtde": 0,
+            "Vendas": 0
+        },
+        {
+            "Cod": 6,
+            "Nome": "123",
+            "Desc": "123",
+            "Preco": 123.0,
             "Qtde": 0,
             "Vendas": 0
         }

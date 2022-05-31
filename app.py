@@ -74,10 +74,10 @@ class MainApp(MDApp):
         for index in range(0, len(data["Produtos"])):
             produto = (
                 data["Produtos"][index]["Cod"],
-                data["Produtos"][index]["Nome"],
-                data["Produtos"][index]["Desc"],
-                data["Produtos"][index]["Preco"],
-                data["Produtos"][index]["Qtde"],
+                "| " + str(data["Produtos"][index]["Nome"]),
+                "| " + str(data["Produtos"][index]["Desc"]),
+                "| " + str(data["Produtos"][index]["Preco"]),
+                "| " + str(data["Produtos"][index]["Qtde"]),
                 )
             list.append(produto)
         self.data_tables = MDDataTable(
@@ -88,7 +88,7 @@ class MainApp(MDApp):
             column_data=[
                 ("Código", dp(12)),
                 ("Nome", dp(25)),
-                ("Descrição", dp(61)),
+                ("Descrição",dp(61)),
                 ("Preço", dp(18)),
                 ("Qtde", dp(15)),
             ],
@@ -101,6 +101,7 @@ class MainApp(MDApp):
     def on_row_press(self, instance_table, instance_row):
         try:
             self.codAlteracao = int(instance_row.text)
+
             self.editScreen()
             return
         except ValueError:
@@ -118,6 +119,20 @@ class MainApp(MDApp):
         except ValueError:
             self.root.get_screen('edit').ids.error_label_edit.text = f'Preco fornecido nao e um numero'
             return False
+
+    def deletaDado(self):
+        dual = Estoque()
+        codDelete = self.codAlteracao
+        if dual.excluirProduto(codDelete):
+            self.root.current = 'estoque'
+            self.root.get_screen('add').ids.nome.text = f''
+            self.root.get_screen('add').ids.desc.text = f''
+            self.root.get_screen('add').ids.preco.text = f''
+            self.estoqueFunc()
+            return
+        print("lalala")
+        return
+
 
     def editScreen(self):
         self.root.current = 'edit'
@@ -140,10 +155,13 @@ class MainApp(MDApp):
         try:
             if (dual.incluirProduto(nome, desc, float(preco))):
                 self.root.current = 'estoque'
+                self.root.get_screen('add').ids.nome.text = f''
+                self.root.get_screen('add').ids.desc.text = f''
+                self.root.get_screen('add').ids.preco.text = f''
                 self.estoqueFunc()
                 return
             else:
-                self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos'
+                self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos ou produto ja adicionado'
                 return False
         except ValueError:
             self.root.get_screen('add').ids.error_label_add.text = f'O preco fornecido nao e um numero'
@@ -160,11 +178,11 @@ class MainApp(MDApp):
         for index in range(0, len(data["Registros"])):
             financas = (
                 data["Registros"][index]["Cod_Compra"],
-                data["Registros"][index]["Cod_Produto"],
-                data["Registros"][index]["CompraVenda"],
-                data["Registros"][index]["Qtde"],
-                data["Registros"][index]["Valor_Uni"],
-                data["Registros"][index]["Data"],
+                "| " + str(data["Registros"][index]["Cod_Produto"]),
+                "| " + str(data["Registros"][index]["CompraVenda"]),
+                "| " + str(data["Registros"][index]["Qtde"]),
+                "| " + str(data["Registros"][index]["Valor_Uni"]),
+                "| " + str(data["Registros"][index]["Data"]),
             )
             list.append(financas)
         self.data_tables = MDDataTable(
@@ -189,21 +207,22 @@ class MainApp(MDApp):
         self.root.current = 'addFinanceiro'
         return
 
-    def adicionarFinanceiro(self, codProd, tipo, qtde, valor):
+    def adicionaFinanceiro(self, codProd, tipo, qtde, valor):
         dual = Financeiro()
         try:
-            if (dual.adicionarFinanceiro(codProd, tipo, int(qtde)), float(valor)):
+            if (dual.adicionarFinanceiro(int(codProd), tipo, int(qtde), float(valor))):
                 self.root.get_screen('addFinanceiro').ids.cod.text = f''
                 self.root.get_screen('addFinanceiro').ids.tipo.text = f''
                 self.root.get_screen('addFinanceiro').ids.valor.text = f''
                 self.root.get_screen('addFinanceiro').ids.qtde.text = f''
                 self.root.current = 'financeiro'
+                self.financeiroFunc()
                 return
             else:
-                self.root.get_screen('add').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
+                self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
                 return False
         except ValueError:
-            self.root.get_screen('add').ids.error_label_add_financeiro.text = f'Favor inserir uma quantidade e um valor em termos de numeros'
+            self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Favor inserir uma quantidade e um valor em termos de numeros'
             return False
 
     def logsFunc(self):
@@ -211,14 +230,14 @@ class MainApp(MDApp):
             data = json.load(file)
         list = []
         for index in range(0, len(data["Alteracoes"])):
-            financas = (
+            alter = (
                 data["Alteracoes"][index]["Cod_Produto"],
-                data["Alteracoes"][index]["Novo_Nome"],
-                data["Alteracoes"][index]["Nova_Desc"],
-                data["Alteracoes"][index]["Novo_Preco"],
-                data["Alteracoes"][index]["Autor_Alteracao"],
+                "| " + str(data["Alteracoes"][index]["Novo_Nome"]),
+                "| " + str(data["Alteracoes"][index]["Nova_Desc"]),
+                "| " + str(data["Alteracoes"][index]["Novo_Preco"]),
+                "| " + str(data["Alteracoes"][index]["Autor_Alteracao"]),
             )
-            list.append(financas)
+            list.append(alter)
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.8),
             use_pagination=True,
@@ -237,16 +256,11 @@ class MainApp(MDApp):
         self.root.get_screen('logs').ids.data_layout_logs.add_widget(self.data_tables)
         return True
 
-    '''def start_background_task(self):
-        threading.Thread(target= self.callFunction).start()
-
-    def callFunction(self, *args):
-        result = function_takes_awhile(self.answer.text)
-        if result != None:
-            self.root.current = 'estoque'
-    '''
     def changeAdd(self):
         self.root.current = 'estoque'
+        self.root.get_screen('add').ids.nome.text = f''
+        self.root.get_screen('add').ids.desc.text = f''
+        self.root.get_screen('add').ids.preco.text = f''
         return
 
     def changeEdit(self):
@@ -255,6 +269,10 @@ class MainApp(MDApp):
         
     def changeFinanceiro(self):
         self.root.current = 'financeiro'
+        self.root.get_screen('addFinanceiro').ids.cod.text = f''
+        self.root.get_screen('addFinanceiro').ids.tipo.text = f''
+        self.root.get_screen('addFinanceiro').ids.valor.text = f''
+        self.root.get_screen('addFinanceiro').ids.qtde.text = f''
         self.financeiroFunc()
         return
 

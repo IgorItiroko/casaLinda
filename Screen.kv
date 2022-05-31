@@ -247,6 +247,13 @@ windowManager:
             on_press: app.editaDado(novo_nome.text, nova_desc.text, novo_preco.text)
 
         MDRoundFlatButton:
+            text: "Deletar"
+            font_size: 15
+            pos_hint: {"center_x": 0.5}
+            on_press: app.deletaDado()
+        
+
+        MDRoundFlatButton:
             text: "Sair"
             font_size: 15
             pos_hint: {"center_x": 0.5}
@@ -310,23 +317,14 @@ windowManager:
         orientation: 'vertical'
 
         MDTextField:
-            id: qtde
-            hint_text: "Quantidade"
-            size_hint_x: None
-            width: 200
-            font_size: 18
-            pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
-
-        MDTextField:
             id: cod
-            hint_text: "Código"
+            hint_text: "Código do produto"
             size_hint_x: None
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
-            
+            on_text_validate : app.adicionaFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
         MDTextField:
             id: tipo
             hint_text: "Tipo (C ou V)"
@@ -334,7 +332,16 @@ windowManager:
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+            on_text_validate : app.adicionaFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+
+        MDTextField:
+            id: qtde
+            hint_text: "Quantidade"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_x": 0.5}
+            on_text_validate : app.adicionaFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
 
         MDTextField:
             id: valor
@@ -343,13 +350,13 @@ windowManager:
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
-            on_text_validate : app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+            on_text_validate : app.adicionaFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
 
         MDRoundFlatButton:
             text: "Adicionar"
             font_size: 15
             pos_hint: {"center_x": 0.5}
-            on_press: app.adicionarFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
+            on_press: app.adicionaFinanceiro(cod.text, tipo.text, qtde.text, valor.text)
 
         MDRoundFlatButton:
             text: "Sair"
@@ -358,7 +365,7 @@ windowManager:
             on_press: app.changeFinanceiro()
 
         MDLabel:
-            id: error_label_add
+            id: error_label_add_financeiro
             text: ""
             theme_text_color: "Error"
             font_size: 15
