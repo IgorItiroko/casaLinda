@@ -1,5 +1,6 @@
 import json
 import kivy
+import threading
 from tkinter import Y
 
 from kivy.lang import Builder
@@ -39,6 +40,9 @@ class AddFinanceiroScreen(Screen):
 class LogsScreen(Screen):
     pass
 
+class AddFinanceiroScreen(Screen):
+    pass
+
 class windowManager(ScreenManager):
     pass
 
@@ -50,6 +54,8 @@ sm.add_widget(AddScreen(name='add'))
 sm.add_widget(EditScreen(name='edit'))
 sm.add_widget(FinanceiroScreen(name='financeiro'))
 sm.add_widget(LogsScreen(name='logs'))
+sm.add_widget(AddFinanceiroScreen(name='addFinanceiro'))
+
 
 class MainApp(MDApp):
     codAlteracao = 0
@@ -187,7 +193,11 @@ class MainApp(MDApp):
         dual = Financeiro()
         try:
             if (dual.adicionarFinanceiro(codProd, tipo, int(qtde)), float(valor)):
-                self.root.current = 'estoque'
+                self.root.get_screen('addFinanceiro').ids.cod.text = f''
+                self.root.get_screen('addFinanceiro').ids.tipo.text = f''
+                self.root.get_screen('addFinanceiro').ids.valor.text = f''
+                self.root.get_screen('addFinanceiro').ids.qtde.text = f''
+                self.root.current = 'financeiro'
                 return
             else:
                 self.root.get_screen('add').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
@@ -227,6 +237,14 @@ class MainApp(MDApp):
         self.root.get_screen('logs').ids.data_layout_logs.add_widget(self.data_tables)
         return True
 
+    '''def start_background_task(self):
+        threading.Thread(target= self.callFunction).start()
+
+    def callFunction(self, *args):
+        result = function_takes_awhile(self.answer.text)
+        if result != None:
+            self.root.current = 'estoque'
+    '''
     def changeAdd(self):
         self.root.current = 'estoque'
         return
@@ -242,6 +260,8 @@ class MainApp(MDApp):
 
     def changeSair(self):
         self.root.current = 'login'
+        self.root.get_screen('login').ids.user.text = f''
+        self.root.get_screen('login').ids.password.text = f''
         return
 
     def changeEstoque(self):
