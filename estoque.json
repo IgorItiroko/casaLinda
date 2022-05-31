@@ -10,169 +10,25 @@
         },
         {
             "Cod": 2,
-            "Nome": "134",
-            "Desc": "1234",
-            "Preco": 1324.0,
-            "Qtde": 136.99,
-            "Vendas": 9
+            "Nome": "banana",
+            "Desc": "prata",
+            "Preco": 6.99,
+            "Qtde": 0,
+            "Vendas": 0
         },
         {
             "Cod": 3,
-            "Nome": "robson",
-            "Desc": "de comer",
-            "Preco": 1999.43,
-            "Qtde": 140.99,
-            "Vendas": 5
+            "Nome": "1",
+            "Desc": "1",
+            "Preco": 1.0,
+            "Qtde": 0,
+            "Vendas": 0
         },
         {
             "Cod": 4,
-            "Nome": "Mesa",
-            "Desc": "Mesa da sala",
-            "Preco": 20,
-            "Qtde": 145.99,
-            "Vendas": 0
-        },
-        {
-            "Cod": 5,
-            "Nome": "Mesa",
-            "Desc": "Mesa da vesera",
-            "Preco": 20,
-            "Qtde": 146.99,
-            "Vendas": 0
-        },
-        {
-            "Cod": 6,
-            "Nome": "Marjori",
-            "Desc": "Naum sei se eu quero isto",
-            "Preco": 95.2,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 7,
-            "Nome": "Caneta Testada",
-            "Desc": "Ela tem uma cor bonitinha",
-            "Preco": 10,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 8,
-            "Nome": "Caneta Naum tetada",
-            "Desc": "Ela tem uma cor bonitinha",
-            "Preco": 10,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 9,
-            "Nome": "Caneta meio tetada",
-            "Desc": "Ela tem uma cor feia",
-            "Preco": 10,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 10,
-            "Nome": "Caneta",
-            "Desc": "Ela tem uma cor feia",
-            "Preco": 10,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 11,
-            "Nome": "Caneta",
-            "Desc": "bla",
-            "Preco": 10,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 12,
-            "Nome": "nome",
-            "Desc": 4,
-            "Preco": 5,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 13,
-            "Nome": "nome 123",
-            "Desc": "desc",
-            "Preco": 14,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 14,
-            "Nome": "",
-            "Desc": "desc",
-            "Preco": 14,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 15,
-            "Nome": "art",
-            "Desc": "ast",
-            "Preco": 14,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 16,
-            "Nome": "Caneta",
-            "Desc": "Azul",
-            "Preco": 14.5,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 17,
-            "Nome": "Caneta",
-            "Desc": "Verde",
-            "Preco": 17.5,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 18,
-            "Nome": "Caneta",
-            "Desc": "Lilas",
-            "Preco": 17.5,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 19,
-            "Nome": "mesa",
-            "Desc": "de madeira",
-            "Preco": 199.99,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 20,
-            "Nome": "cavalo",
-            "Desc": "de madeira",
-            "Preco": 85.99,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 21,
-            "Nome": "cenoura",
-            "Desc": "vegetal",
-            "Preco": 1.99,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 22,
-            "Nome": "vagem",
-            "Desc": "vegetal",
-            "Preco": 2.88,
+            "Nome": "2",
+            "Desc": "2",
+            "Preco": 2.0,
             "Qtde": 0,
             "Vendas": 0
         }

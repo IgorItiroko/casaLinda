@@ -12,6 +12,8 @@ windowManager:
         name: "financeiro"
     AddFinanceiroScreen:
         name: "addFinanceiro"
+    LogsScreen:
+        name: "logs"
 
 <LoginScreen>:
     MDCard:
@@ -104,6 +106,7 @@ windowManager:
             MDRaisedButton:
                 text: "Logs"
                 pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeLogs()
                 y: 10
 
             MDRaisedButton:
@@ -266,6 +269,7 @@ windowManager:
             MDRaisedButton:
                 text: "Logs"
                 pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeLogs()
                 y: 10
 
             MDRaisedButton:
@@ -360,3 +364,34 @@ windowManager:
             size_hint_y: None
             height: self.texture_size[1]
             padding_y: 15
+
+<LogsScreen>:
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        MDToolbar:
+            title: "Casa Linda"
+            orientation: 'horizontal'
+            elevation: 10
+
+            MDRaisedButton:
+                text: "Estoque"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeEstoque()
+                y: 10
+
+            MDRaisedButton:
+                text: "Financeiro"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFinanceiro()
+                y: 10
+
+            MDRaisedButton:
+                text: "Sair"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeSair()
+                y: 10
+        
+        AnchorLayout:
+            id: data_layout_logs

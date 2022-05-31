@@ -1,4 +1,5 @@
 import json
+import kivy
 from tkinter import Y
 
 from kivy.lang import Builder
@@ -10,9 +11,11 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.list import OneLineListItem
-
+from kivy.config import Config 
+kivy.config.Config.set('graphics','resizable', False)
 from estoque import Estoque
 from financeiro import Financeiro
+
 
 
 class LoginScreen(Screen):
@@ -33,6 +36,9 @@ class FinanceiroScreen(Screen):
 class AddFinanceiroScreen(Screen):
     pass
 
+class LogsScreen(Screen):
+    pass
+
 class windowManager(ScreenManager):
     pass
 
@@ -43,6 +49,7 @@ sm.add_widget(EstoqueScreen(name='estoque'))
 sm.add_widget(AddScreen(name='add'))
 sm.add_widget(EditScreen(name='edit'))
 sm.add_widget(FinanceiroScreen(name='financeiro'))
+sm.add_widget(LogsScreen(name='logs'))
 
 class MainApp(MDApp):
     codAlteracao = 0
@@ -106,8 +113,6 @@ class MainApp(MDApp):
             self.root.get_screen('edit').ids.error_label_edit.text = f'Preco fornecido nao e um numero'
             return False
 
-        
-
     def editScreen(self):
         self.root.current = 'edit'
         return
@@ -129,6 +134,7 @@ class MainApp(MDApp):
         try:
             if (dual.incluirProduto(nome, desc, float(preco))):
                 self.root.current = 'estoque'
+                self.estoqueFunc()
                 return
             else:
                 self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos'
@@ -152,6 +158,7 @@ class MainApp(MDApp):
                 data["Registros"][index]["CompraVenda"],
                 data["Registros"][index]["Qtde"],
                 data["Registros"][index]["Valor_Uni"],
+                data["Registros"][index]["Data"],
             )
             list.append(financas)
         self.data_tables = MDDataTable(
@@ -160,12 +167,12 @@ class MainApp(MDApp):
             rows_num=5,
             pagination_menu_pos = 'auto',
             column_data=[
-                ("Cod_Compra", dp(12)),
-                ("Cod_Produto", dp(25)),
-                ("CompraVenda", dp(61)),
-                ("Qtde", dp(18)),
+                ("Código Compra", dp(25)),
+                ("Código Produto", dp(25)),
+                ("Transação", dp(25)),
+                ("Quantidade", dp(20)),
                 ("Valor", dp(15)),
-                ("Data", dp(15)),
+                ("Data", dp(20)),
             ],
             row_data= list
         )
@@ -201,23 +208,25 @@ class MainApp(MDApp):
                 data["Alteracoes"][index]["Novo_Preco"],
                 data["Alteracoes"][index]["Autor_Alteracao"],
             )
-            list.appen(financas)
+            list.append(financas)
         self.data_tables = MDDataTable(
             size_hint=(0.9, 0.8),
             use_pagination=True,
             rows_num=5,
             pagination_menu_pos = 'auto',
             column_data=[
-                ("Cod_Produto", dp(25)),
-                ("Novo_Nome", dp(25)),
-                ("Nova_Desc", dp(2)),
-                ("Novo_Preco", dp(18)),
-                ("Autor_Alteracao", dp(20)),
+                ("Código Produto", dp(25)),
+                ("Novo Nome", dp(25)),
+                ("Nova Descrição", dp(30)),
+                ("Novo Preco", dp(25)),
+                ("Autor da Alteracao", dp(30)),
             ],
             row_data= list
         )
-        self.root.get_screen('logs').ids.data_layout.add_widget(self.data_tables)
+
+        self.root.get_screen('logs').ids.data_layout_logs.add_widget(self.data_tables)
         return True
+
     def changeAdd(self):
         self.root.current = 'estoque'
         return
@@ -238,4 +247,10 @@ class MainApp(MDApp):
     def changeEstoque(self):
         self.root.current = 'estoque'
         return
+
+    def changeLogs(self):
+        self.root.current = 'logs'
+        self.logsFunc()
+        return
+
 MainApp().run()
