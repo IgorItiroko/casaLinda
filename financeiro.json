@@ -15,6 +15,22 @@
             "Qtde": 13,
             "Valor_Uni": 8.99,
             "Data": "31/5/2022"
+        },
+        {
+            "Cod_Compra": 4,
+            "Cod_Produto": 3,
+            "CompraVenda": "C",
+            "Qtde": 13,
+            "Valor_Uni": 12.0,
+            "Data": "1/6/2022"
+        },
+        {
+            "Cod_Compra": 5,
+            "Cod_Produto": 3,
+            "CompraVenda": "V",
+            "Qtde": 5,
+            "Valor_Uni": 11.0,
+            "Data": "1/6/2022"
         }
     ]
 }

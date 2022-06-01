@@ -10,11 +10,11 @@
         },
         {
             "Cod": 3,
-            "Nome": "1",
-            "Desc": "1",
-            "Preco": 1.0,
-            "Qtde": 0,
-            "Vendas": 0
+            "Nome": "Fossil",
+            "Desc": "Fanatic",
+            "Preco": 2.0,
+            "Qtde": 8,
+            "Vendas": 5
         },
         {
             "Cod": 4,

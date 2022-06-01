@@ -24,11 +24,11 @@ class Feed:
                 max = 0
                 produto = (
                             dataEstoque["Produtos"][maxid]["Cod"],
-                            dataEstoque["Produtos"][maxid]["Nome"],
-                            dataEstoque["Produtos"][maxid]["Desc"],
-                            dataEstoque["Produtos"][maxid]["Preco"],
-                            dataEstoque["Produtos"][maxid]["Qtde"],
-                            dataEstoque["Produtos"][maxid]["Vendas"]
+                            "| " + str(dataEstoque["Produtos"][maxid]["Nome"]),
+                            "| " + str(dataEstoque["Produtos"][maxid]["Desc"]),
+                            "| " + str(dataEstoque["Produtos"][maxid]["Preco"]),
+                            "| " + str(dataEstoque["Produtos"][maxid]["Qtde"]),
+                            "| " + str(dataEstoque["Produtos"][maxid]["Vendas"])
                         )
                 list.append(produto)
 
@@ -40,6 +40,13 @@ class Feed:
             dataEstoque = json.load(fileEstoque)
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
-            if dataEstoque["Produtos"][index]["Qtde"] == 0:
-                list.append(dataEstoque["Produtos"][index])
+            if dataEstoque["Produtos"][index]["Qtde"] < 5:
+                produto = (
+                            dataEstoque["Produtos"][index]["Cod"],
+                            "| " + str(dataEstoque["Produtos"][index]["Nome"]),
+                            "| " + str(dataEstoque["Produtos"][index]["Desc"]),
+                            "| " + str(dataEstoque["Produtos"][index]["Preco"]),
+                            "| " + str(dataEstoque["Produtos"][index]["Qtde"]),
+                        )
+                list.append(produto)
         return list

@@ -16,10 +16,14 @@ from kivy.config import Config
 kivy.config.Config.set('graphics','resizable', False)
 from estoque import Estoque
 from financeiro import Financeiro
+from feeds import Feed
 
 
 
 class LoginScreen(Screen):
+    pass
+
+class FeedScreen(Screen):
     pass
 
 class EstoqueScreen(Screen):
@@ -40,9 +44,6 @@ class AddFinanceiroScreen(Screen):
 class LogsScreen(Screen):
     pass
 
-class AddFinanceiroScreen(Screen):
-    pass
-
 class windowManager(ScreenManager):
     pass
 
@@ -55,7 +56,7 @@ sm.add_widget(EditScreen(name='edit'))
 sm.add_widget(FinanceiroScreen(name='financeiro'))
 sm.add_widget(LogsScreen(name='logs'))
 sm.add_widget(AddFinanceiroScreen(name='addFinanceiro'))
-
+sm.add_widget(FeedScreen(name='feed'))
 
 class MainApp(MDApp):
     codAlteracao = 0
@@ -65,8 +66,70 @@ class MainApp(MDApp):
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "BlueGray"
         return sm
+    
+    '''
+        Tela de feed
+    '''
+    def feedFunc(self):
+        dual = Feed()
+        list = dual.exibirMaisVendidos(5)
+        self.data_tables = MDDataTable(
+            size_hint=(0.9, 0.8),
+            use_pagination=True,
+            rows_num=5,
+            pagination_menu_pos = 'auto',
+            column_data=[
+                ("Código", dp(12)),
+                ("Nome", dp(25)),
+                ("Descrição",dp(61)),
+                ("Preço", dp(18)),
+                ("Qtde", dp(15)),
+                ("Vendas", dp(18)),
+            ],
+            row_data= list
+        )
+        self.root.get_screen('feed').ids.data_layout_feed.add_widget(self.data_tables) 
+        return True
 
+    def feedFuncBE(self):
+        dual = Feed()
+        list = dual.faltaDeEstoque()
+        self.data_tables = MDDataTable(
+            size_hint=(0.9, 0.8),
+            use_pagination=True,
+            rows_num=5,
+            pagination_menu_pos = 'auto',
+            column_data=[
+                ("Código", dp(12)),
+                ("Nome", dp(25)),
+                ("Descrição",dp(61)),
+                ("Preço", dp(18)),
+                ("Qtde", dp(15))
+            ],
+            row_data= list
+        )
+        self.root.get_screen('feed').ids.data_layout_feed.add_widget(self.data_tables) 
+        return True
 
+    '''
+        Função inicial do programam: Etapa de segurança
+        Aguarda usuário e senha
+    '''
+
+    def verificarLogin(self, user, password):
+        listaLogin = json.load(open('loginData.json', 'r'))
+        for i in listaLogin:
+            if user == format(i['usuario']) and password == format(i['senha']):
+                self.root.current = 'estoque'
+                self.estoqueFunc()
+                return True
+            else:
+                self.root.get_screen('login').ids.error_label.text = f'Usuário e/ou senha incorretos'
+                return False
+
+    '''
+        Geração / Atualização da tabela de estoque
+    '''
     def estoqueFunc(self):
         with open("estoque.json") as file:
             data = json.load(file)
@@ -98,6 +161,10 @@ class MainApp(MDApp):
         self.root.get_screen('estoque').ids.data_layout.add_widget(self.data_tables) 
         return True
 
+    '''
+        Configurações para edição de produtos da tabela estoque
+    '''
+
     def on_row_press(self, instance_table, instance_row):
         try:
             self.codAlteracao = int(instance_row.text)
@@ -108,6 +175,9 @@ class MainApp(MDApp):
             self.root.get_screen('estoque').ids.error_label_estoque.text = f'Para realizar alteracoes clicar no codigo'
             return False
     
+    '''
+        Resposta interna para o botão de confirmação de dados ao editar elemento
+    '''
     def editaDado(self, novoNome, novaDesc, novoPreco):
         dual = Estoque()
         try:
@@ -119,6 +189,10 @@ class MainApp(MDApp):
         except ValueError:
             self.root.get_screen('edit').ids.error_label_edit.text = f'Preco fornecido nao e um numero'
             return False
+
+    '''
+        Resposta interna para o botão de deletar um dado elemento da tabela Estoque
+    '''
 
     def deletaDado(self):
         dual = Estoque()
@@ -133,22 +207,9 @@ class MainApp(MDApp):
         print("lalala")
         return
 
-
-    def editScreen(self):
-        self.root.current = 'edit'
-        return
-
-    def verificarLogin(self, user, password):
-        listaLogin = json.load(open('loginData.json', 'r'))
-        for i in listaLogin:
-            if user == format(i['usuario']) and password == format(i['senha']):
-                self.root.current = 'estoque'
-                self.estoqueFunc()
-                return True
-            else:
-                self.root.get_screen('login').ids.error_label.text = f'Usuário e/ou senha incorretos'
-                return False
-
+    '''
+        Resposta interna para o botão de confirmação de dados ao adicionar elemento
+    '''
 
     def adicionaDado(self, nome, desc, preco):
         dual = Estoque()
@@ -167,10 +228,9 @@ class MainApp(MDApp):
             self.root.get_screen('add').ids.error_label_add.text = f'O preco fornecido nao e um numero'
             return False
 
-    def addScreen(self):
-        self.root.current = 'add'
-        return
-
+    '''
+        Geração / Atualização da tabela do financeiro
+    '''
     def financeiroFunc(self):
         with open("financeiro.json") as file:
             data = json.load(file)
@@ -203,10 +263,9 @@ class MainApp(MDApp):
         self.root.get_screen('financeiro').ids.data_layout_financeiro.add_widget(self.data_tables)
         return True
 
-    def addFinanceiroScreen(self):
-        self.root.current = 'addFinanceiro'
-        return
-
+    '''
+        Resposta interna para o botão de confirmação de dados ao adicionar elemento no financeiro
+    '''
     def adicionaFinanceiro(self, codProd, tipo, qtde, valor):
         dual = Financeiro()
         try:
@@ -225,6 +284,9 @@ class MainApp(MDApp):
             self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Favor inserir uma quantidade e um valor em termos de numeros'
             return False
 
+    '''
+        Geração / Atualização da tabela logs
+    '''
     def logsFunc(self):
         with open("logs.json") as file:
             data = json.load(file)
@@ -256,6 +318,70 @@ class MainApp(MDApp):
         self.root.get_screen('logs').ids.data_layout_logs.add_widget(self.data_tables)
         return True
 
+    '''
+        Função para buscas personalizadas
+    '''
+    def buscaPersonalizada(self, nome, preco, max):
+        dual = Estoque()
+        list = ()
+        try:
+            if nome != "" and max == True and preco != "":
+                list = dual.pesquisarPorNomePrecoMax(nome, float(preco))
+            if nome != "" and max == False and preco != "":
+                list = dual.pesquisarPorNomePrecoMin(nome, float(preco))
+            if nome == "" and max == True and preco != "":
+                list = dual.pesquisarPorPrecoMax(float(preco))
+            if nome == "" and max == False and preco != "":
+                list = dual.pesquisarPorPrecoMin(float(preco))
+            if nome != "" and preco =="":
+                list = dual.pesquisarProdutoPorNome(nome)
+        except ValueError:
+            return False
+        self.data_tables = MDDataTable(
+            size_hint=(0.9, 0.8),
+            use_pagination=True,
+            rows_num=5,
+            pagination_menu_pos = 'auto',
+            column_data=[
+                ("Código", dp(12)),
+                ("Nome", dp(25)),
+                ("Descrição",dp(61)),
+                ("Preço", dp(18)),
+                ("Qtde", dp(15)),
+            ],
+            row_data= list
+        )
+        self.data_tables.bind(on_row_press=self.on_row_press)
+        self.root.get_screen('estoque').ids.data_layout.add_widget(self.data_tables) 
+        self.root.current = 'estoque'
+        return True
+        
+    '''
+        Comandos para mudança de tela
+    '''
+
+    def addFinanceiroScreen(self):
+        self.root.current = 'addFinanceiro'
+        return
+
+    def addScreen(self):
+        self.root.current = 'add'
+        return
+
+    def editScreen(self):
+        self.root.current = 'edit'
+        return
+
+    def changeFeed(self):
+        self.root.current = 'feed'
+        self.feedFunc()
+        return
+
+    def changeFeedBE(self):
+        self.root.current = 'feed'
+        self.feedFuncBE()
+        return
+
     def changeAdd(self):
         self.root.current = 'estoque'
         self.root.get_screen('add').ids.nome.text = f''
@@ -284,6 +410,7 @@ class MainApp(MDApp):
 
     def changeEstoque(self):
         self.root.current = 'estoque'
+        self.estoqueFunc()
         return
 
     def changeLogs(self):

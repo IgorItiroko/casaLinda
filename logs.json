@@ -3,13 +3,6 @@
         {
             "Cod_Produto": 1,
             "Novo_Nome": "Cenoura",
-            "Nova_Desc": "para prazer",
-            "Novo_Preco": 150,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 1,
-            "Novo_Nome": "Cenoura",
             "Nova_Desc": "de comer",
             "Novo_Preco": 3.99,
             "Autor_Alteracao": "Lucia"
@@ -54,6 +47,13 @@
             "Novo_Nome": "robson",
             "Nova_Desc": "de comer",
             "Novo_Preco": 1999.43,
+            "Autor_Alteracao": "Lucia"
+        },
+        {
+            "Cod_Produto": 3,
+            "Novo_Nome": "Fossil",
+            "Nova_Desc": "Fanatic",
+            "Novo_Preco": 2.0,
             "Autor_Alteracao": "Lucia"
         }
     ]
