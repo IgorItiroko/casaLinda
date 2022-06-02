@@ -417,4 +417,11 @@ class MainApp(MDApp):
         self.logsFunc()
         return
 
+    def changeTheme(self):
+        if self.theme_cls.theme_style == "Dark":
+            self.theme_cls.theme_style = "Light"
+        else:
+            self.theme_cls.theme_style = "Dark"
+        return
+
 MainApp().run()
