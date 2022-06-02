@@ -23,22 +23,6 @@
             "Preco": 2.0,
             "Qtde": 13,
             "Vendas": 0
-        },
-        {
-            "Cod": 5,
-            "Nome": "5",
-            "Desc": "5",
-            "Preco": 10.99,
-            "Qtde": 0,
-            "Vendas": 0
-        },
-        {
-            "Cod": 6,
-            "Nome": "123",
-            "Desc": "123",
-            "Preco": 123.0,
-            "Qtde": 0,
-            "Vendas": 0
         }
     ]
 }

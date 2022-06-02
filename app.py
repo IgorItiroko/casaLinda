@@ -120,8 +120,7 @@ class MainApp(MDApp):
         listaLogin = json.load(open('loginData.json', 'r'))
         for i in listaLogin:
             if user == format(i['usuario']) and password == format(i['senha']):
-                self.root.current = 'estoque'
-                self.estoqueFunc()
+                self.changeFeed()
                 return True
             else:
                 self.root.get_screen('login').ids.error_label.text = f'Usuário e/ou senha incorretos'

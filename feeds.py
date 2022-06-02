@@ -15,6 +15,9 @@ class Feed:
             dataEstoque = json.load(fileEstoque)
         list = []
         max = 0
+        if len(dataEstoque["Produtos"]) < qtde:
+            qtde = len(dataEstoque["Produtos"])
+            
         if len(dataEstoque["Produtos"]) >= qtde:
             for _ in range(0, qtde):
                 for index in range(0, len(dataEstoque["Produtos"])):
@@ -34,7 +37,7 @@ class Feed:
 
                 dataEstoque["Produtos"].pop(maxid)  
             return list
-        return (False, "Quantidade de produtos registrados menor do que " + str(qtde))
+        return []
     def faltaDeEstoque(self):
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)

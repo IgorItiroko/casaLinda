@@ -14,6 +14,8 @@ windowManager:
         name: "addFinanceiro"
     LogsScreen:
         name: "logs"
+    FeedScreen:
+        name: "feed"
 
 <LoginScreen>:
     MDCard:
@@ -98,6 +100,12 @@ windowManager:
             title: "Área Estoque"
             orientation: 'horizontal'
             elevation: 10
+
+            MDRaisedButton:
+                text: "Inicio"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFeed()
+                y: 10
 
             MDRaisedButton:
                 text: "Financeiro"
@@ -270,6 +278,12 @@ windowManager:
             elevation: 10
 
             MDRaisedButton:
+                text: "Inicio"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFeed()
+                y: 10
+
+            MDRaisedButton:
                 text: "Estoque"
                 pos_hint: {"center_x": 0, "center_y": 0.5}
                 on_release: app.changeEstoque()
@@ -385,6 +399,12 @@ windowManager:
             elevation: 10
 
             MDRaisedButton:
+                text: "Inicio"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFeed()
+                y: 10
+
+            MDRaisedButton:
                 text: "Estoque"
                 pos_hint: {"center_x": 0, "center_y": 0.5}
                 on_release: app.changeEstoque()
@@ -405,3 +425,52 @@ windowManager:
         AnchorLayout:
             id: data_layout_logs
         
+<FeedScreen>:
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        MDToolbar:
+            title: "Área Inicial"
+            orientation: 'horizontal'
+            elevation: 10
+
+            MDRaisedButton:
+                text: "Inicio"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFeed()
+                y: 10
+
+            MDRaisedButton:
+                text: "Estoque"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeEstoque()
+                y: 10
+
+            MDRaisedButton:
+                text: "Financeiro"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeFinanceiro()
+                y: 10
+
+            MDRaisedButton:
+                text: "Logs"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeLogs()
+                y: 10
+
+            MDRaisedButton:
+                text: "Sair"
+                pos_hint: {"center_x": 0, "center_y": 0.5}
+                on_release: app.changeSair()
+                y: 10
+        
+        AnchorLayout:
+            id: data_layout_feed
+    
+    MDRaisedButton:
+        text: "Adicionar"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.addScreen()
+        y: 10
