@@ -129,12 +129,61 @@ windowManager:
         
         AnchorLayout:
             id: data_layout
-    
-    MDRaisedButton:
-        text: "Adicionar"
-        pos_hint: {"center_x": 0.5}
-        on_release: app.addScreen()
-        y: 10
+
+    MDBoxLayout:
+        orientation: 'horizontal'
+        padding: 10
+
+        MDLabel:
+            text: "MAX"
+            pos_hint: {"center_y": 0.04}
+            font_size: 15
+
+        MDCheckbox:
+            id: max
+            size_hint: None, None
+            pos_hint: {"center_y": 0.04}
+            active: True
+
+        MDTextField:
+            id: preco
+            hint_text: "Preço"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_y": 0.04}
+            on_text_validate : app.buscaPersonalizada(busca.text, preco.text, True if max.active else False)
+
+        MDLabel:
+            text: " "
+            pos_hint: {"center_y": 0.04}
+            font_size: 15
+
+        MDTextField:
+            id: busca
+            hint_text: "Nome"
+            size_hint_x: None
+            width: 200
+            font_size: 18
+            pos_hint: {"center_y": 0.04}
+            on_text_validate : app.buscaPersonalizada(busca.text, preco.text, True if max.active else False)
+
+        MDRaisedButton:
+            text: "Buscar"
+            pos_hint: {"center_y": 0.04}
+            on_release: app.buscaPersonalizada(busca.text, preco.text, True if max.active else False)
+            y: 10
+
+        MDLabel:
+            text: " "
+            pos_hint: {"center_y": 0.04}
+            font_size: 15
+
+        MDRaisedButton:
+            text: "Adicionar"
+            pos_hint: {"center_x": 0.5, "center_y": 0.04}
+            on_release: app.addScreen()
+            y: 10
 
 <AddScreen>:
     MDLabel:
@@ -486,9 +535,7 @@ windowManager:
         AnchorLayout:
             id: data_layout_feed
 
-        MDRaisedButton:
-            text: "Trocar"
-            pos_hint: {"center_x": 0.5}
-            on_release: app.changeFeedBE()
-            y: 10
-    
+        
+
+
+            
