@@ -23,6 +23,14 @@
             "Preco": 2.0,
             "Qtde": 13,
             "Vendas": 0
+        },
+        {
+            "Cod": 5,
+            "Nome": "Isreal",
+            "Desc": "Irado",
+            "Preco": 22.0,
+            "Qtde": 0,
+            "Vendas": 0
         }
     ]
 }

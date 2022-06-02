@@ -17,7 +17,7 @@ class Feed:
         max = 0
         if len(dataEstoque["Produtos"]) < qtde:
             qtde = len(dataEstoque["Produtos"])
-            
+
         if len(dataEstoque["Produtos"]) >= qtde:
             for _ in range(0, qtde):
                 for index in range(0, len(dataEstoque["Produtos"])):
@@ -53,3 +53,4 @@ class Feed:
                         )
                 list.append(produto)
         return list
+

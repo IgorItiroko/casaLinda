@@ -63,8 +63,8 @@ class MainApp(MDApp):
     def build(self):
         sm = Builder.load_file('Screen.kv')
 
-        self.theme_cls.theme_style = "Dark"
-        self.theme_cls.primary_palette = "BlueGray"
+        self.theme_cls.theme_style = "Light"
+        self.theme_cls.primary_palette = "DeepPurple"
         return sm
     
     '''
@@ -81,7 +81,7 @@ class MainApp(MDApp):
             column_data=[
                 ("Código", dp(12)),
                 ("Nome", dp(25)),
-                ("Descrição",dp(61)),
+                ("Descrição",dp(41)),
                 ("Preço", dp(18)),
                 ("Qtde", dp(15)),
                 ("Vendas", dp(18)),
