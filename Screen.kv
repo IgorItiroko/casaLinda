@@ -559,9 +559,15 @@ windowManager:
                 theme_icon_color: "Custom"
                 y: 10
                 on_release: app.changeTheme()
-        
+
         AnchorLayout:
             id: data_layout_feed
+
+        MDRaisedButton:
+            text: "Alterar"
+            pos_hint: {"center_x": 0.5}
+            on_release: app.changeFeedBE()
+            y: 10
 
         
 

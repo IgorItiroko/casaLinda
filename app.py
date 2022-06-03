@@ -376,9 +376,14 @@ class MainApp(MDApp):
         self.feedFunc()
         return
 
+    currState = False
     def changeFeedBE(self):
-        self.root.current = 'feed'
-        self.feedFuncBE()
+        if self.currState == False:
+            self.currState = True
+            self.feedFuncBE()
+        else:
+            self.currState = False
+            self.feedFunc()
         return
 
     def changeAdd(self):
