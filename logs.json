@@ -2,58 +2,9 @@
     "Alteracoes": [
         {
             "Cod_Produto": 1,
-            "Novo_Nome": "Cenoura",
-            "Nova_Desc": "de comer",
-            "Novo_Preco": 3.99,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 1,
-            "Novo_Nome": "Batata",
-            "Nova_Desc": "de comer",
-            "Novo_Preco": 3.99,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 2,
-            "Novo_Nome": "Lustre",
-            "Nova_Desc": "Ilumina quarto",
-            "Novo_Preco": 34.99,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 2,
-            "Novo_Nome": "Lustre",
-            "Nova_Desc": "Ilumina quarto",
-            "Novo_Preco": 34.99,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 2,
-            "Novo_Nome": "134",
-            "Nova_Desc": "1234",
-            "Novo_Preco": 1324.0,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 3,
-            "Novo_Nome": "robson\t",
-            "Nova_Desc": "de comer",
-            "Novo_Preco": 1999.87,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 3,
-            "Novo_Nome": "robson",
-            "Nova_Desc": "de comer",
-            "Novo_Preco": 1999.43,
-            "Autor_Alteracao": "Lucia"
-        },
-        {
-            "Cod_Produto": 3,
-            "Novo_Nome": "Fossil",
-            "Nova_Desc": "Fanatic",
-            "Novo_Preco": 2.0,
+            "Novo_Nome": "Mesa",
+            "Nova_Desc": "De madeira",
+            "Novo_Preco": 145.99,
             "Autor_Alteracao": "Lucia"
         }
     ]
