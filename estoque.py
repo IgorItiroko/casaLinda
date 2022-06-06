@@ -71,12 +71,15 @@ class Estoque:
                     verifElemento=1
                     break
         if verifElemento == 0:
-            list = {"Cod": dataEstoque["Produtos"][len(dataEstoque["Produtos"]) - 1]["Cod"] + 1, "Nome": nome, "Desc": desc, "Preco": preco, "Qtde": 0, "Vendas": 0}
+            try:
+                list = {"Cod": dataEstoque["Produtos"][len(dataEstoque["Produtos"]) - 1]["Cod"] + 1, "Nome": nome, "Desc": desc, "Preco": preco, "Qtde": 0, "Vendas": 0}
+            except:
+                list = {"Cod": 1, "Nome": nome, "Desc": desc, "Preco": preco, "Qtde": 0, "Vendas": 0}
             dataEstoque["Produtos"].append(list)
             self.fecharJson("estoque.json",dataEstoque)
             return True
         else:
-            print("Elemento já adicionado")
+            return False
 
     def excluirProduto(self, codProd):
         encontrado = 0
@@ -140,7 +143,7 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Preco"] <= precMax:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
 
     def pesquisarPorPrecoMin(self, precMin):
@@ -152,7 +155,7 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Preco"] >= precMin:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
 
     def pesquisarPorNomePrecoMin(self, nome, precMin):
@@ -164,7 +167,7 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Preco"] >= precMin and dataEstoque["Produtos"][index]["Nome"] == nome:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
 
     def pesquisarPorNomePrecoMax(self, nome, precMax):
@@ -176,21 +179,21 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Preco"] <= precMax and dataEstoque["Produtos"][index]["Nome"] == nome:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
     
     def pesquisarPorPrecoMinMax(self, precMin, precMax):
         if not (isinstance(precMax, (int, float)) and isinstance(precMin, (int, float))):
             return False
         if precMin > precMax:
-            return (False, "valor minimo maior que o maximo")
+            return False
         dataEstoque = self.abrirJson("estoque.json")
         list = []
         for index in range(0, len(dataEstoque["Produtos"])):
             if dataEstoque["Produtos"][index]["Preco"] >= precMin and dataEstoque["Produtos"][index]["Preco"] <= precMax:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
 
     def estoqueBaixo(self):
@@ -200,7 +203,7 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Qtde"] <= 2:
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
 
 

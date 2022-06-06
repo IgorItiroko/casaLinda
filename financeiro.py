@@ -12,10 +12,6 @@ class Financeiro:
         if tipo == "V" or tipo == "C":
             if isinstance(cod, int) and isinstance(qtde, int) and isinstance(valor,(int,float)):
                 return True
-            else:
-                print("Valores fornecidos não são números")
-        else:
-            print("Tipo de transacao incompativel com compra ou venda")
         return False
     """
         *----------------------------------------*
@@ -33,7 +29,10 @@ class Financeiro:
             dataFinanceiro = json.load(fileFinanceiro)
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
-        list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
+        try:
+            list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
+        except:
+            list = {"Cod_Compra": 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
         dataFinanceiro["Registros"].append(list)
         for index in range(0, len(dataEstoque["Produtos"])):
             if(dataEstoque["Produtos"][index]["Cod"] == codProd):
@@ -45,7 +44,7 @@ class Financeiro:
                         dataEstoque["Produtos"][index]["Qtde"] -= qtde
                         dataEstoque["Produtos"][index]["Vendas"] += qtde
                     else:
-                        return (False,"Sem estoque")
+                        return False
         if(encontrado == 1):
             with open("estoque.json","w") as fileOutEstoque:
                 json.dump(dataEstoque, fileOutEstoque, indent=4)
@@ -53,4 +52,4 @@ class Financeiro:
                 json.dump(dataFinanceiro, fileOutFinanceiro, indent=4)
             return True
         else: 
-            return (False,"Codigo invalido")
+            return False

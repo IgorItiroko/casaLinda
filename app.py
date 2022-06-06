@@ -64,7 +64,7 @@ class MainApp(MDApp):
         sm = Builder.load_file('Screen.kv')
 
         self.theme_cls.theme_style = "Light"
-        self.theme_cls.primary_palette = "DeepPurple"
+        self.theme_cls.primary_palette = "Orange"
         return sm
     
     '''
@@ -179,6 +179,11 @@ class MainApp(MDApp):
     '''
     def editaDado(self, novoNome, novaDesc, novoPreco):
         dual = Estoque()
+        self.root.get_screen('edit').ids.novo_nome.text = f''
+        self.root.get_screen('edit').ids.nova_desc.text = f''
+        self.root.get_screen('edit').ids.novo_preco.text = f''
+        self.root.get_screen('edit').ids.error_label_edit.text = f''
+        self.root.get_screen('estoque').ids.error_label_estoque.text = f''
         try:
             if dual.editarProduto("Lucia" ,self.codAlteracao ,novoNome, novaDesc, float(novoPreco)):
                 self.codAlteracao = 0
@@ -186,7 +191,7 @@ class MainApp(MDApp):
                 self.estoqueFunc()
                 return 
         except ValueError:
-            self.root.get_screen('edit').ids.error_label_edit.text = f'Preco fornecido nao e um numero'
+            self.root.get_screen('edit').ids.error_label_edit.text = f'Dados fornecidos invalidos'
             return False
 
     '''
@@ -198,12 +203,8 @@ class MainApp(MDApp):
         codDelete = self.codAlteracao
         if dual.excluirProduto(codDelete):
             self.root.current = 'estoque'
-            self.root.get_screen('add').ids.nome.text = f''
-            self.root.get_screen('add').ids.desc.text = f''
-            self.root.get_screen('add').ids.preco.text = f''
             self.estoqueFunc()
             return
-        print("lalala")
         return
 
     '''
@@ -212,19 +213,19 @@ class MainApp(MDApp):
 
     def adicionaDado(self, nome, desc, preco):
         dual = Estoque()
+        self.root.get_screen('add').ids.nome.text = f''
+        self.root.get_screen('add').ids.desc.text = f''
+        self.root.get_screen('add').ids.preco.text = f''
         try:
             if (dual.incluirProduto(nome, desc, float(preco))):
                 self.root.current = 'estoque'
-                self.root.get_screen('add').ids.nome.text = f''
-                self.root.get_screen('add').ids.desc.text = f''
-                self.root.get_screen('add').ids.preco.text = f''
                 self.estoqueFunc()
                 return
             else:
                 self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos ou produto ja adicionado'
                 return False
         except ValueError:
-            self.root.get_screen('add').ids.error_label_add.text = f'O preco fornecido nao e um numero'
+            self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos'
             return False
 
     '''
@@ -267,6 +268,10 @@ class MainApp(MDApp):
     '''
     def adicionaFinanceiro(self, codProd, tipo, qtde, valor):
         dual = Financeiro()
+        self.root.get_screen('addFinanceiro').ids.cod.text = f''
+        self.root.get_screen('addFinanceiro').ids.tipo.text = f''
+        self.root.get_screen('addFinanceiro').ids.valor.text = f''
+        self.root.get_screen('addFinanceiro').ids.qtde.text = f''
         try:
             if (dual.adicionarFinanceiro(int(codProd), tipo, int(qtde), float(valor))):
                 self.root.get_screen('addFinanceiro').ids.cod.text = f''
@@ -280,7 +285,7 @@ class MainApp(MDApp):
                 self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
                 return False
         except ValueError:
-            self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Favor inserir uma quantidade e um valor em termos de numeros'
+            self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
             return False
 
     '''
@@ -324,6 +329,10 @@ class MainApp(MDApp):
         dual = Estoque()
         list = ()
         try:
+            if nome == "" and preco == "":
+                self.root.current = "estoque"
+                self.estoqueFunc()
+                return False
             if nome != "" and max == True and preco != "":
                 list = dual.pesquisarPorNomePrecoMax(nome, float(preco))
             if nome != "" and max == False and preco != "":
@@ -353,6 +362,8 @@ class MainApp(MDApp):
         self.data_tables.bind(on_row_press=self.on_row_press)
         self.root.get_screen('estoque').ids.data_layout.add_widget(self.data_tables) 
         self.root.current = 'estoque'
+        self.root.get_screen('estoque').ids.preco.text = f''
+        self.root.get_screen('estoque').ids.nome.text = f''
         return True
         
     '''
@@ -361,10 +372,16 @@ class MainApp(MDApp):
 
     def addFinanceiroScreen(self):
         self.root.current = 'addFinanceiro'
+        self.root.get_screen('addFinanceiro').ids.cod.text = f''
+        self.root.get_screen('addFinanceiro').ids.tipo.text = f''
+        self.root.get_screen('addFinanceiro').ids.valor.text = f''
+        self.root.get_screen('addFinanceiro').ids.qtde.text = f''
+        self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f''
         return
 
     def addScreen(self):
         self.root.current = 'add'
+        self.root.get_screen('add').ids.error_label_add.text = f''
         return
 
     def editScreen(self):
@@ -373,6 +390,7 @@ class MainApp(MDApp):
 
     def changeFeed(self):
         self.root.current = 'feed'
+        self.root.get_screen('feed').ids.titulo_feed.title = f'Área Inicial Mais Vendidos'
         self.feedFunc()
         return
 
@@ -380,9 +398,11 @@ class MainApp(MDApp):
     def changeFeedBE(self):
         if self.currState == False:
             self.currState = True
+            self.root.get_screen('feed').ids.titulo_feed.title = f'Área Inicial Baixo Estoque'
             self.feedFuncBE()
         else:
             self.currState = False
+            self.root.get_screen('feed').ids.titulo_feed.title = f'Área Inicial Mais Vendidos'
             self.feedFunc()
         return
 
@@ -395,14 +415,11 @@ class MainApp(MDApp):
 
     def changeEdit(self):
         self.root.current = 'edit'
+        self.root.get_screen('edit').ids.error_label_edit.text = f''
         return
         
     def changeFinanceiro(self):
         self.root.current = 'financeiro'
-        self.root.get_screen('addFinanceiro').ids.cod.text = f''
-        self.root.get_screen('addFinanceiro').ids.tipo.text = f''
-        self.root.get_screen('addFinanceiro').ids.valor.text = f''
-        self.root.get_screen('addFinanceiro').ids.qtde.text = f''
         self.financeiroFunc()
         return
 
@@ -410,10 +427,12 @@ class MainApp(MDApp):
         self.root.current = 'login'
         self.root.get_screen('login').ids.user.text = f''
         self.root.get_screen('login').ids.password.text = f''
+        self.root.get_screen('login').ids.error_label.text = f''
         return
 
     def changeEstoque(self):
         self.root.current = 'estoque'
+        self.root.get_screen('estoque').ids.error_label_estoque.text = f''
         self.estoqueFunc()
         return
 
@@ -425,10 +444,10 @@ class MainApp(MDApp):
     def changeTheme(self):
         if self.theme_cls.theme_style == "Dark":
             self.theme_cls.theme_style = "Light"
-            self.theme_cls.primary_palette = "DeepPurple"
+            self.theme_cls.primary_palette = "Orange"
         else:
             self.theme_cls.theme_style = "Dark"
-            self.theme_cls.primary_palette = "BlueGray"
+            self.theme_cls.primary_palette = "DeepOrange"
         return
 
 MainApp().run()
