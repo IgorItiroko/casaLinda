@@ -18,14 +18,19 @@ windowManager:
         name: "feed"
 
 <LoginScreen>:
+
     MDCard:
         size_hint: None, None
-        size: 300, 400
+        size: 300, 450
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         elevation: 10
         padding: 25
         spacing: 25
         orientation: 'vertical'
+
+        FitImage:
+            size_hint_y: 1
+            source: 'images/logo.png'
 
         MDTextFieldRound:
             id: user
@@ -70,17 +75,6 @@ windowManager:
             font_size: 15
             pos_hint: {"center_x": 0.5}
             on_press: app.verificarLogin(user.text, password.text)
-            
-
-    MDLabel:
-        id: title_label
-        text: "Casa linda"
-        font_size: 40
-        halign: 'center'
-        size_hint_y: 1.85
-        height: self.texture_size[1]
-        padding_y: 15
-
 
 <EstoqueScreen>:
     MDLabel:

@@ -171,7 +171,7 @@ class MainApp(MDApp):
             self.editScreen()
             return
         except ValueError:
-            self.root.get_screen('estoque').ids.error_label_estoque.text = f'Para realizar alteracoes clicar no codigo'
+            self.root.get_screen('estoque').ids.error_label_estoque.text = f'Para realizar alterações clicar no código do produto'
             return False
     
     '''
@@ -191,7 +191,7 @@ class MainApp(MDApp):
                 self.estoqueFunc()
                 return 
         except ValueError:
-            self.root.get_screen('edit').ids.error_label_edit.text = f'Dados fornecidos invalidos'
+            self.root.get_screen('edit').ids.error_label_edit.text = f'Dados fornecidos inválidos'
             return False
 
     '''
@@ -222,10 +222,10 @@ class MainApp(MDApp):
                 self.estoqueFunc()
                 return
             else:
-                self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos ou produto ja adicionado'
+                self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos inválidos ou produto já adicionado'
                 return False
         except ValueError:
-            self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos invalidos'
+            self.root.get_screen('add').ids.error_label_add.text = f'Dados fornecidos inválidos'
             return False
 
     '''
@@ -282,10 +282,10 @@ class MainApp(MDApp):
                 self.financeiroFunc()
                 return
             else:
-                self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
+                self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos inválidos'
                 return False
         except ValueError:
-            self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos invalidos'
+            self.root.get_screen('addFinanceiro').ids.error_label_add_financeiro.text = f'Dados fornecidos inválidos'
             return False
 
     '''
