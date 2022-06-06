@@ -33,12 +33,8 @@ class Financeiro:
             dataFinanceiro = json.load(fileFinanceiro)
         with open("estoque.json") as fileEstoque:
             dataEstoque = json.load(fileEstoque)
-        try:
-            list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
-            dataFinanceiro["Registros"].append(list)
-        except:
-            list = {"Cod_Compra": 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
-            dataFinanceiro["Registros"].append(list)
+        list = {"Cod_Compra": dataFinanceiro["Registros"][len(dataFinanceiro["Registros"]) - 1]["Cod_Compra"] + 1, "Cod_Produto": codProd, "CompraVenda": tipo,"Qtde": qtde, "Valor_Uni": valor, "Data": str(time.localtime(). tm_mday) + "/" + str(time.localtime(). tm_mon) + "/" + str(time.localtime(). tm_year)}
+        dataFinanceiro["Registros"].append(list)
         for index in range(0, len(dataEstoque["Produtos"])):
             if(dataEstoque["Produtos"][index]["Cod"] == codProd):
                 encontrado = 1
@@ -49,7 +45,7 @@ class Financeiro:
                         dataEstoque["Produtos"][index]["Qtde"] -= qtde
                         dataEstoque["Produtos"][index]["Vendas"] += qtde
                     else:
-                        return False
+                        return (False,"Sem estoque")
         if(encontrado == 1):
             with open("estoque.json","w") as fileOutEstoque:
                 json.dump(dataEstoque, fileOutEstoque, indent=4)
@@ -57,4 +53,4 @@ class Financeiro:
                 json.dump(dataFinanceiro, fileOutFinanceiro, indent=4)
             return True
         else: 
-            return False
+            return (False,"Codigo invalido")

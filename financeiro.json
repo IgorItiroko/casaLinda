@@ -1,44 +1,36 @@
 {
     "Registros": [
         {
-            "Cod_Compra": 1,
-            "Cod_Produto": 1,
-            "CompraVenda": "C",
-            "Qtde": 14,
-            "Valor_Uni": 200.0,
-            "Data": "3/6/2022"
-        },
-        {
             "Cod_Compra": 2,
             "Cod_Produto": 1,
-            "CompraVenda": "V",
-            "Qtde": 8,
-            "Valor_Uni": 359.99,
-            "Data": "3/6/2022"
+            "CompraVenda": "C",
+            "Qtde": 12,
+            "Valor_Uni": 3.99,
+            "Data": "30/5/2022"
         },
         {
             "Cod_Compra": 3,
-            "Cod_Produto": 3,
+            "Cod_Produto": 4,
             "CompraVenda": "C",
-            "Qtde": 7,
-            "Valor_Uni": 100.0,
-            "Data": "3/6/2022"
+            "Qtde": 13,
+            "Valor_Uni": 8.99,
+            "Data": "31/5/2022"
         },
         {
             "Cod_Compra": 4,
-            "Cod_Produto": 5,
+            "Cod_Produto": 3,
             "CompraVenda": "C",
-            "Qtde": 5,
-            "Valor_Uni": 130.0,
-            "Data": "3/6/2022"
+            "Qtde": 13,
+            "Valor_Uni": 12.0,
+            "Data": "1/6/2022"
         },
         {
             "Cod_Compra": 5,
-            "Cod_Produto": 4,
-            "CompraVenda": "C",
-            "Qtde": 7,
-            "Valor_Uni": 1.99,
-            "Data": "3/6/2022"
+            "Cod_Produto": 3,
+            "CompraVenda": "V",
+            "Qtde": 5,
+            "Valor_Uni": 11.0,
+            "Data": "1/6/2022"
         }
     ]
 }
