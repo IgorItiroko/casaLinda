@@ -328,11 +328,11 @@ class MainApp(MDApp):
     def buscaPersonalizada(self, nome, preco, max):
         dual = Estoque()
         list = ()
+        if nome == "" and preco == "":
+            self.root.current = 'estoque'
+            self.estoqueFunc()
+            return False
         try:
-            if nome == "" and preco == "":
-                self.root.current = "estoque"
-                self.estoqueFunc()
-                return False
             if nome != "" and max == True and preco != "":
                 list = dual.pesquisarPorNomePrecoMax(nome, float(preco))
             if nome != "" and max == False and preco != "":
@@ -363,7 +363,7 @@ class MainApp(MDApp):
         self.root.get_screen('estoque').ids.data_layout.add_widget(self.data_tables) 
         self.root.current = 'estoque'
         self.root.get_screen('estoque').ids.preco.text = f''
-        self.root.get_screen('estoque').ids.nome.text = f''
+        self.root.get_screen('estoque').ids.busca.text = f''
         return True
         
     '''

@@ -131,7 +131,7 @@ class Estoque:
             if dataEstoque["Produtos"][index]["Nome"].upper() == nome.upper():
                 list.append(self.montaTupla(dataEstoque, index))
         if not list:
-            return (False,"Sem resultados para a pesquisa")
+            return []
         return list
         
     def pesquisarPorPrecoMax(self, precMax):
